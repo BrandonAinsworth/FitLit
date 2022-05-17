@@ -126,11 +126,12 @@ describe('User Repository', () => {
         "date": "2019/06/15",
         "hoursSlept": 6.1,
         "sleepQuality": 2.2
-      },{
-          "userID": 1,
-          "date": "2019/06/16",
-          "hoursSlept": 4.1,
-          "sleepQuality": 3.8
+      },
+      {
+        "userID": 1,
+        "date": "2019/06/16",
+        "hoursSlept": 4.1,
+        "sleepQuality": 3.8
       }, 
       {
         "userID": 2,
@@ -211,28 +212,24 @@ describe('User Repository', () => {
     }
   });
   
-  it.skip('should be a function', function () {
+  it('should be a function', function () {
     expect(UserRepository).to.be.a('function');
   });
 
-  it.skip(`should be an instance of UserRepository`, () => {
+  it(`should be an instance of UserRepository`, () => {
     expect(userRepository).to.be.instanceOf(UserRepository);
   });
 
-  it.skip(`should return data for an individual user`, () => {
-    let userID = 1;
+  it(`should return data for an individual user`, () => {
 
-    expect(returnSpecificUser(userID)).to.deep.equal(
+    expect(userRepository.returnSpecificUser(1)).to.deep.equal(user1);
 
-    )
-
-    expect()
   });
 
-  it.skip('should average daily step goals amongst all users', () {
-    let averageStepGoal = averageStepGoalAllUsers();
+  it.skip('should average daily step goals amongst all users', () => {
+    let averageStepGoal = userRepository.averageStepGoalAllUsers();
 
-    expect()
+
   });
 
 
