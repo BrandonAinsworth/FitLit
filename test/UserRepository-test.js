@@ -5,10 +5,11 @@ describe('User Repository', () => {
   
   let userRepository; 
   let data;
+  let user1;
   
   beforeEach(() => {
-    data = {[
-      {
+    data = {
+      "users": [{
         "id": 1,
         "name": "Luisa Hane",
         "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
@@ -20,7 +21,7 @@ describe('User Repository', () => {
           4,
           8
         ]
-      }, 
+      },
       {
         "id": 2,
         "name": "Jarvis Considine",
@@ -49,7 +50,7 @@ describe('User Repository', () => {
           33
         ]
       }], 
-      [{
+      "activityData": [{
         "userID": 1,
         "date": "2019/06/15",
         "numSteps": 3577,
@@ -90,7 +91,7 @@ describe('User Repository', () => {
         "minutesActive": 152,
         "flightsOfStairs": 8
       }], 
-      [{
+      "hydrationData": [{
         "userID": 1,
         "date": "2019/06/15",
         "numOunces": 37
@@ -120,7 +121,7 @@ describe('User Repository', () => {
         "date": "2019/06/16",
         "numOunces": 99
       }], 
-      [{
+      "sleepData": [{
         "userID": 1,
         "date": "2019/06/15",
         "hoursSlept": 6.1,
@@ -155,17 +156,88 @@ describe('User Repository', () => {
         "hoursSlept": 10.7,
         "sleepQuality": 3.4
       }]
-    }
+    }      
+  
     userRepository = new UserRepository(data);
+
+    user1 = {
+      "users": [{
+        "id": 1,
+        "name": "Luisa Hane",
+        "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+        "email": "Diana.Hayes1@hotmail.com",
+        "strideLength": 4.3,
+        "dailyStepGoal": 10000,
+        "friends": [
+          16,
+          4,
+          8
+        ]
+      }],
+      "activityData": [{
+        "userID": 1,
+        "date": "2019/06/15",
+        "numSteps": 3577,
+        "minutesActive": 140,
+        "flightsOfStairs": 16
+      },{
+        "userID": 1,
+        "date": "2019/06/16",
+        "numSteps": 6637,
+        "minutesActive": 175,
+        "flightsOfStairs": 36
+      }],
+      "hydrationData": [{
+        "userID": 1,
+        "date": "2019/06/15",
+        "numOunces": 37
+      }, 
+      {
+        "userID": 1,
+        "date": "2019/06/16",
+        "numOunces": 69
+      }],
+      "sleepData": [{
+        "userID": 1,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },{
+          "userID": 1,
+          "date": "2019/06/16",
+          "hoursSlept": 4.1,
+          "sleepQuality": 3.8
+      }]
+    }
   });
   
-  it('should be a function', function () {
+  it.skip('should be a function', function () {
     expect(UserRepository).to.be.a('function');
   });
 
-  it(`should be an instance of UserRepository`, 
-    
-  )
+  it.skip(`should be an instance of UserRepository`, () => {
+    expect(userRepository).to.be.instanceOf(UserRepository);
+  });
 
+  it.skip(`should return data for an individual user`, () => {
+    let userID = 1;
+
+    expect(returnSpecificUser(userID)).to.deep.equal(
+
+    )
+
+    expect()
+  });
+
+  it.skip('should average daily step goals amongst all users', () {
+    let averageStepGoal = averageStepGoalAllUsers();
+
+    expect()
+  });
+
+
+  it.skip(`should average sleep quality for all users`, () => {
+
+  });
 
 });
