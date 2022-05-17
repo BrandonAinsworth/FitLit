@@ -226,15 +226,18 @@ describe('User Repository', () => {
 
   });
 
-  it.skip('should average daily step goals amongst all users', () => {
+  it('should average daily step goals amongst all users', () => {
     let averageStepGoal = userRepository.averageStepGoalAllUsers();
 
+    expect(averageStepGoal).to.equal(6667);
 
   });
 
 
   it.skip(`should average sleep quality for all users`, () => {
+    let averageSleepQuality = userRepository.averageSleepQuality();
 
+    // Sleep calculations will be done in iteration 4.
   });
 
 });
