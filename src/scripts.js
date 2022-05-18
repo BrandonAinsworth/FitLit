@@ -15,3 +15,22 @@ console.log('This is the JavaScript entry file - your code begins here.');
 import userData from './data/users';
 
 import UserRepository from './UserRepository';
+import User from './User';
+
+/*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
+var luisa = userData.filter(user => user.id === 1);
+console.log(luisa);
+var currentUser = new User(luisa);
+
+/*~~~~~~~~QUERY SELECTORS~~~~~~~*/
+var userFirstName = document.querySelector(".greeting");
+var userFullName = document.querySelector(".user-full-name");
+var userAddress = document.querySelector(".user-address");
+var userEmail = document.querySelector(".user-email");
+
+/*~~~~~~~~FUNCTIONS~~~~~~~*/
+function renderGreeting(individual) {
+
+};
+
+renderGreeting(currentUser);

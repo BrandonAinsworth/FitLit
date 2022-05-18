@@ -1,12 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Fitlit</title>
-  </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>FitLit</title>
+</head>
   <body>
-    <h1>Activity Tracker</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+    <section class="sidebar">
+      <div class="sidebar-wrapper">
+        <div class="greeting"></div>
+        <div class="todays-date"></div>
+        <div class="user-info">
+          <div class="user-full-name"></div>
+          <div class="user-address"></div>
+          <div class="user-email"></div>
+        </div>
+      </div>
+    </section>
+    <main>
+      <section class="step-tracker">
+        <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
+        <div class="step-info">
+          <div class="step-goal"></div>
+          <div class="daily-step-count"></div>
+          <div class="weekly-average-step-count"></div>
+        </div>
+      </section>
+    </main>
 
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
