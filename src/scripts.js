@@ -17,21 +17,32 @@ import UserRepository from './UserRepository';
 import User from './User';
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
-var userData = new UserRepository
-var luisa = new User(luisa);
+var userRepo = new UserRepository(userData);
+
+
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
 var userFirstName = document.querySelector(".greeting");
 var userFullName = document.querySelector(".user-full-name");
 var userAddress = document.querySelector(".user-address");
 var userEmail = document.querySelector(".user-email");
+var userStepGoal = document.querySelector(".step-goal");
+var userStrideLength = document.querySelector(".stride-length");
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
-
-
-
-function renderGreeting(individual) {
-//
+function getUserInfo(id) {
+    var currentUser = userRepo.returnSpecificUser(id);
+    userFullName.innerText = `Name: ${currentUser.name}`;
+    userAddress.innerText = `Address: ${currentUser.address}`;
+    userEmail.innerText = `Email: ${currentUser.email}`;
+    userStrideLength.innerText = `Stride Length: ${currentUser.strideLength}ft`;
+    userStepGoal.innerText = `Step Goal: ${currentUser.dailyStepGoal}`;
+    return currentUser;
 };
 
-renderGreeting(currentUser);
+// function renderGreeting() {
+
+// };
+
+var individual = new User(getUserInfo(3));
+console.log('individual', individual);
