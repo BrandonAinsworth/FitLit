@@ -1,6 +1,6 @@
 class User {
-  constructor(userData) {
-    this.user = userData[0];
+  constructor(userDetails) {
+    this.user = userDetails[0];
   }
 
   returnUserFirstName() {

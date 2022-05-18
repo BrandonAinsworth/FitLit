@@ -4,7 +4,7 @@ class UserRepository {
   }
 
   returnSpecificUser(id) {
-    return this.usersData.find((user) => id === user.id );
+    return this.usersData.filter((user) => id === user.id );
   }
 
   averageStepGoalAllUsers() {
