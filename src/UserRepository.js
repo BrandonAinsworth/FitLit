@@ -1,6 +1,6 @@
 class UserRepository {
   constructor(data) {
-    this.usersData = data;
+    this.usersData = data.userData;
   }
 
   returnSpecificUser(id) {
