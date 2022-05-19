@@ -6,12 +6,10 @@ import UserRepository from '../src/UserRepository'
 describe('Hydration', () => {
 
   let hydration;
-  let hydrationData;
   let userRepo;
   let user;
   let userID;
   let usersData;
-
   let data;
 
   beforeEach(() => { 
@@ -189,9 +187,10 @@ describe('Hydration', () => {
     ];
 
     userID = 2;
-    userRepo = new UserRepository(usersData)
+    userRepo = new UserRepository(usersData);
     user = new User(userRepo);
-    hydration = new Hydration(userID);
+    user.hydrationData = data.hydrationData
+    hydration = new Hydration();
   });
 
   it('should be a function', function () {
@@ -201,6 +200,39 @@ describe('Hydration', () => {
   it(`should be an instance of Hydration`, () => {
     expect(hydration).to.be.instanceOf(Hydration);
   });
+
+  it('should calculate average fluid ounces for all time', {
+
+  });  
+
+  it('should be able to handle properties.', {
+
+  });  
+
+  it('should be able to handle properties.', {
+
+  });  
+
+
+  it('should be able to handle properties.', {
+
+  });  
+
+
+  it('should be able to handle properties.', {
+
+  });  
+
+
+
+
+
+
+
+
+
+
+
 
 
 

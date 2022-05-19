@@ -34,25 +34,23 @@ const id = getRandomID();
 
 fetchUsers()
   .then(data => {
-    console.log(data);
     userRepo = new UserRepository(data);
     individual = new User(userRepo.returnSpecificUser(id));
     getUserInfo(id);
     compareAverageStepGoal();
     renderGreeting();
-    console.log(userRepo);
   });
 
 fetchSleep()
   .then(data => {
     sleepData = data;
-    console.log(sleepData);
+    // console.log(sleepData);
   });
 
 fetchActivity()
   .then(data => {
     activityData = data;
-    console.log(activityData);
+    // console.log(activityData);
   });
 
 fetchHydration()
