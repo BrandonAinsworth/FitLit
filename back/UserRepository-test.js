@@ -616,21 +616,21 @@ describe('User Repository', () => {
     }
   });
 
-  it('should be a function', function () {
+  it.skip('should be a function', function () {
     expect(UserRepository).to.be.a('function');
   });
 
-  it(`should be an instance of UserRepository`, () => {
+  it.skip(`should be an instance of UserRepository`, () => {
     expect(userRepository).to.be.instanceOf(UserRepository);
   });
 
-  it(`should return data for an individual user`, () => {
+  it.skip(`should return data for an individual user`, () => {
 
     expect(userRepository.returnSpecificUser(1)).to.deep.equal(user1);
 
   });
 
-  it('should average daily step goals amongst all users', () => {
+  it.skip('should average daily step goals amongst all users', () => {
     let averageStepGoal = userRepository.averageStepGoalAllUsers();
 
 

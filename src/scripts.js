@@ -34,6 +34,7 @@ const id = getRandomID();
 
 fetchUsers()
   .then(data => {
+    console.log(data);
     userRepo = new UserRepository(data);
     individual = new User(userRepo.returnSpecificUser(id));
     getUserInfo(id);

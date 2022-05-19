@@ -1,20 +1,24 @@
 class UserRepository {
   constructor(data) {
-    this.usersData = data.userData;
+    this.allUsersData = data.userData;
+  }
+
+  componentDidMount() {
+    console.log(this.allUsersData);
   }
 
   returnSpecificUser(id) {
-    return this.usersData.filter((user) => id === user.id );
+    return this.allUsersData.filter((user) => id === user.id );
   }
 
   averageStepGoalAllUsers() {
     let result = 0;
-    let totalStepsGoal = this.usersData.reduce((total, user) => {
+    let totalStepsGoal = this.allUsersData.reduce((total, user) => {
 
         total += user.dailyStepGoal;
         return total;
       }, 0);
-      result = parseInt((totalStepsGoal / this.usersData.length).toFixed(0));
+      result = parseInt((totalStepsGoal / this.allUsersData.length).toFixed(0));
       return result;
   }
 
