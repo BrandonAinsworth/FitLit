@@ -6,10 +6,9 @@ import UserRepository from '../src/UserRepository'
 describe('Hydration', () => {
 
   let hydration;
-  let userRepo;
-  let user;
-  let userID;
+  let userHydration;
   let usersData;
+  let userID;
   let data;
 
   beforeEach(() => { 
@@ -186,11 +185,12 @@ describe('Hydration', () => {
       }
     ];
 
-    userID = 2;
-    userRepo = new UserRepository(usersData);
-    user = new User(userRepo);
-    user.hydrationData = data.hydrationData
-    hydration = new Hydration();
+
+    hydration = new Hydration(data);
+
+    userID = Math.floor(Math.random() * 3);  
+    userHydration = hydration.returnSpecificUser(userID);
+
   });
 
   it('should be a function', function () {
@@ -201,39 +201,13 @@ describe('Hydration', () => {
     expect(hydration).to.be.instanceOf(Hydration);
   });
 
-  it('should calculate average fluid ounces for all time', {
+  it('should hold all users hydration data', () => {
+    expect(hydration.allUsersHydrationData).to.deep.equal(data);
+  });
 
-  });  
-
-  it('should be able to handle properties.', {
-
-  });  
-
-  it('should be able to handle properties.', {
-
-  });  
-
-
-  it('should be able to handle properties.', {
-
-  });  
-
-
-  it('should be able to handle properties.', {
-
-  });  
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // it('should return data for an individual user', () => {
+  //   console.log()
+  //   expect().to.deep.equal();
+  // });
 
 });
