@@ -23,6 +23,11 @@ class User {
     return averageAllTime;
   };
 
+  returnDailyOuncesConsumed(date) {
+    let dailyConsumed = this.hydrationData.find(dailyOunces => dailyOunces.date === date)
+    return dailyConsumed.numOunces;
+  };
+
 };
 
 export default User;

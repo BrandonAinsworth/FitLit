@@ -196,6 +196,7 @@ describe('User', () => {
 
     currentUser = new User(user);
     hydration = new Hydration(hydrationData);
+    currentUser.getHydrationData(hydration);
   });
 
   it('should be a function', function () {
@@ -215,12 +216,14 @@ describe('User', () => {
   });
 
   it('should save hydration data in an array for a single user', () => {
-    currentUser.getHydrationData(hydration);
     expect(currentUser.hydrationData).to.deep.equal(currentUserHydration);
   });
 
   it('should return the average ounces consumed per day for all time', () => {
-    currentUser.getHydrationData(hydration);
     expect(currentUser.averageAllTimeOuncesConsumed()).to.be.equal(71);
+  });
+
+  it('should return the number of ounces consumed for a specific day', () => {
+    expect(currentUser.returnDailyOuncesConsumed("2019/06/19")).to.be.equal(76);
   });
 });
