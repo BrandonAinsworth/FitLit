@@ -226,4 +226,10 @@ describe('User', () => {
   it('should return the number of ounces consumed for a specific day', () => {
     expect(currentUser.returnDailyOuncesConsumed("2019/06/19")).to.be.equal(76);
   });
+
+  it('should return the daily consumption per day for the last 7 days', () => {
+    expect(currentUser.returnWeeklyOuncesConsumed()).to.deep.equal([58, 27, 71, 76, 70, 96, 91])
+  });
+
+
 });

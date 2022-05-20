@@ -28,6 +28,21 @@ class User {
     return dailyConsumed.numOunces;
   };
 
+  returnWeeklyOuncesConsumed() {
+    let banana = this.hydrationData.sort((a, b) => {
+      let dateA = new Date (a.date);
+      let dateB = new Date (b.date);
+      return dateB - dateA;
+    });
+
+    let output = [];
+    for (let i = 0; i < 7; i++) {
+      output.push(banana[i].numOunces);
+    };
+
+    return output;
+  };
+
 };
 
 export default User;
