@@ -214,12 +214,13 @@ describe('User', () => {
     expect(currentUser.returnUserFirstName()).to.be.equal('Jarvis')
   });
 
-  it.skip('should save hydration data in an array for a single user', () => {
+  it('should save hydration data in an array for a single user', () => {
+    currentUser.getHydrationData(hydration);
     expect(currentUser.hydrationData).to.deep.equal(currentUserHydration);
   });
 
-  it.skip('should return the average ounces consumed per day for all time', () => {
-    expect(currentUser.averageAllTimeOuncesConsumed()).to.be.equal.to(71);
+  it('should return the average ounces consumed per day for all time', () => {
+    currentUser.getHydrationData(hydration);
+    expect(currentUser.averageAllTimeOuncesConsumed()).to.be.equal(71);
   });
-
 });
