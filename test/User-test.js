@@ -231,5 +231,4 @@ describe('User', () => {
     expect(currentUser.returnWeeklyOuncesConsumed()).to.deep.equal([58, 27, 71, 76, 70, 96, 91])
   });
 
-
 });
