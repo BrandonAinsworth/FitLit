@@ -6,6 +6,7 @@ class User {
     this.hydrationData = [];
     this.sortedHydrationData = [];
     this.sleepData = [];
+    this.sortedSleepData = [];
   };
 
   returnUserFirstName() {
@@ -77,6 +78,27 @@ class User {
     let dailyQuality = this.sleepData.find(dailyQuality => dailyQuality.date === date)
     return dailyQuality.sleepQuality;
   };
+
+  returnWeeklySleepData(date) {
+    this.sortedSleepData = this.sleepData.sort((a, b) => {
+    let dateA = new Date (a.date);
+    let dateB = new Date (b.date);
+    return dateB - dateA;
+  });
+
+  let index = this.sortedSleepData.findIndex((e) => e.date === date);
+  
+  let output = [];
+
+  for (let i = 0; i < 7; i++) {
+    output.push(this.sortedSleepData[index + i]);
+  }
+  
+  return output;
+};
+
+
+
 
 };
 
