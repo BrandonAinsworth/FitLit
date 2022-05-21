@@ -4,6 +4,7 @@ class User {
   constructor(userDetails) {
     this.user = userDetails[0];
     this.hydrationData = [];
+    this.sortedHydrationData = [];
   };
 
   returnUserFirstName() {
@@ -31,14 +32,13 @@ class User {
   };
 
   returnWeeklyOuncesConsumed() {
-      this.hydrationData = this.hydrationData.sort((a, b) => {
+      this.sortedHydrationData = this.hydrationData.sort((a, b) => {
       let dateA = new Date (a.date);
       let dateB = new Date (b.date);
       return dateB - dateA;
     });
 
-   let output = this.hydrationData.filter((point, index) => index < 7);
-
+    let output = this.sortedHydrationData.filter((point, index) => index < 7);
     return output;
   };
 

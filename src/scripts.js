@@ -20,7 +20,7 @@ var userStepGoal = document.querySelector(".step-goal");
 var userStrideLength = document.querySelector(".stride-length");
 var averageStepGoal = document.querySelector(".average-step-goal");
 var totalDailyOunces = document.querySelector(".total-daily-ounces");
-
+var weeklyWaterConsumption = document.querySelector(".weekly-water-consumption");
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -72,6 +72,7 @@ fetchHydration()
     individual.getHydrationData(hydrationRepo);
     weeklyConsumption = individual.returnWeeklyOuncesConsumed();
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
+    renderWeeklyWaterConsumption(weeklyConsumption);
     totalDailyOunces.innerText = dailyConsumption;
   });
 
@@ -92,4 +93,13 @@ function renderGreeting() {
 
 function compareAverageStepGoal(){
    averageStepGoal.innerText = `All FitLit Users Average Step Goal: ${userRepo.averageStepGoalAllUsers()}`;
+};
+
+function renderWeeklyWaterConsumption(weeklyConsumption) {
+  let chartOutput = weeklyConsumption.reduce((acc, dailyOunces) => {
+    acc += `${dailyOunces.date}: ${dailyOunces.numOunces} oz.\n`
+    return acc;
+  }, "");
+
+  weeklyWaterConsumption.innerText = chartOutput
 };
