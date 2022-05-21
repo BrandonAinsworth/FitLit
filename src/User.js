@@ -37,10 +37,7 @@ class User {
       return dateB - dateA;
     });
 
-    let output = [];
-    for (let i = 0; i < 7; i++) {
-      output.push(this.hydrationData[i].numOunces);
-    };
+   let output = this.hydrationData.filter((point, index) => index < 7);
 
     return output;
   };

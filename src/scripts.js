@@ -52,24 +52,6 @@ function getUsers(){
 
 getUsers()
 
-
-
-
-
-
-
-
-
-// var fetchUser = 
-//     fetchUsers()
-//         .then(data => {
-//             userRepo = new UserRepository(data);
-//             individual = new User(userRepo.returnSpecificUser(id));
-//             getUserInfo(id);
-//             compareAverageStepGoal();
-//             renderGreeting();
-//         });
-
 fetchSleep()
   .then(data => {
     sleepData = data;
@@ -87,12 +69,10 @@ fetchHydration()
     hydrationData = data;
     hydrationRepo = new Hydration(hydrationData);
     individual.hydrationData.push(hydrationRepo.returnSpecificUser(id));
-    console.log('individual' , individual);
     individual.getHydrationData(hydrationRepo);
     weeklyConsumption = individual.returnWeeklyOuncesConsumed();
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
-    console.log(weeklyConsumption);
-    console.log(dailyConsumption);
+    totalDailyOunces.innerText = dailyConsumption;
   });
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
