@@ -8,6 +8,7 @@ import {
  } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
+import Hydration from './Hydration';
 
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
@@ -18,6 +19,8 @@ var userEmail = document.querySelector(".user-email");
 var userStepGoal = document.querySelector(".step-goal");
 var userStrideLength = document.querySelector(".stride-length");
 var averageStepGoal = document.querySelector(".average-step-goal");
+var totalDailyOunces = document.querySelector(".total-daily-ounces");
+
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -25,6 +28,10 @@ var individual;
 var sleepData;
 var activityData;
 var hydrationData;
+var hydrationRepo;
+var weeklyConsumption;
+var dailyConsumption;
+
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
@@ -32,14 +39,36 @@ const getRandomID = () => {
 
 const id = getRandomID();
 
-fetchUsers()
-  .then(data => {
-    userRepo = new UserRepository(data);
-    individual = new User(userRepo.returnSpecificUser(id));
-    getUserInfo(id);
-    compareAverageStepGoal();
-    renderGreeting();
-  });
+function getUsers(){
+    fetchUsers()
+        .then(data => {
+            userRepo = new UserRepository(data);
+            individual = new User(userRepo.returnSpecificUser(id));
+            getUserInfo(id);
+            compareAverageStepGoal();
+            renderGreeting();
+        });
+}
+
+getUsers()
+
+
+
+
+
+
+
+
+
+// var fetchUser = 
+//     fetchUsers()
+//         .then(data => {
+//             userRepo = new UserRepository(data);
+//             individual = new User(userRepo.returnSpecificUser(id));
+//             getUserInfo(id);
+//             compareAverageStepGoal();
+//             renderGreeting();
+//         });
 
 fetchSleep()
   .then(data => {
@@ -56,7 +85,14 @@ fetchActivity()
 fetchHydration()
   .then(data => {
     hydrationData = data;
-    console.log(hydrationData);
+    hydrationRepo = new Hydration(hydrationData);
+    individual.hydrationData.push(hydrationRepo.returnSpecificUser(id));
+    console.log('individual' , individual);
+    individual.getHydrationData(hydrationRepo);
+    weeklyConsumption = individual.returnWeeklyOuncesConsumed();
+    dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
+    console.log(weeklyConsumption);
+    console.log(dailyConsumption);
   });
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/

@@ -1,3 +1,5 @@
+import Hydration from "./Hydration";
+
 class User {
   constructor(userDetails) {
     this.user = userDetails[0];
@@ -29,7 +31,7 @@ class User {
   };
 
   returnWeeklyOuncesConsumed() {
-    let banana = this.hydrationData.sort((a, b) => {
+      this.hydrationData = this.hydrationData.sort((a, b) => {
       let dateA = new Date (a.date);
       let dateB = new Date (b.date);
       return dateB - dateA;
@@ -37,7 +39,7 @@ class User {
 
     let output = [];
     for (let i = 0; i < 7; i++) {
-      output.push(banana[i].numOunces);
+      output.push(this.hydrationData[i].numOunces);
     };
 
     return output;
