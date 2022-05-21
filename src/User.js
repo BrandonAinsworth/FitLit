@@ -5,6 +5,7 @@ class User {
     this.user = userDetails[0];
     this.hydrationData = [];
     this.sortedHydrationData = [];
+    this.sleepData = [];
   };
 
   returnUserFirstName() {
@@ -40,6 +41,41 @@ class User {
 
     let output = this.sortedHydrationData.filter((point, index) => index < 7);
     return output;
+  };
+
+  getSleepData(allSleepData) {
+    this.sleepData = allSleepData.returnSpecificUser(this.user.id);
+  };
+
+  averageHoursSleptAllTime() {
+    let totalHours = this.sleepData.reduce((total, point) => {
+      total += point.hoursSlept;
+      return total;
+    }, 0);
+
+    let averageAllTime = parseFloat((totalHours / this.sleepData.length).toFixed(1));
+    return averageAllTime;    
+  };
+
+  averageSleepQualityAllTime() {
+    let totalQuality = this.sleepData.reduce((total, point) => {
+      total += point.sleepQuality;
+      return total;
+    }, 0);
+
+    let averageAllTime = parseFloat((totalQuality / this.sleepData.length).toFixed(1));
+    return averageAllTime;    
+  };
+
+  returnDailyHoursSlept(date) {
+    let dailyHours = this.sleepData.find(dailyHrs => dailyHrs.date === date)
+    return dailyHours.hoursSlept;
+  };
+
+
+  returnDailySleepQuality(date) {
+    let dailyQuality = this.sleepData.find(dailyQuality => dailyQuality.date === date)
+    return dailyQuality.sleepQuality;
   };
 
 };

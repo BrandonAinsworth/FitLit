@@ -16,7 +16,6 @@ class Sleep {
         return total;
       }, 0);
       result = parseFloat((totalSleepQuality / this.allUsersSleepData.length).toFixed(1));
-      console.log(result)
       return result;
   };
 

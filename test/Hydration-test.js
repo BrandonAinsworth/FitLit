@@ -7,8 +7,9 @@ describe('Hydration', () => {
   let hydrationData;
 
   beforeEach(() => {
-    hydrationData = [
-      {
+    hydrationData = {
+      "hydrationData":
+      [{
         "userID": 1,
         "date": "2019/06/15",
         "numOunces": 37
@@ -128,9 +129,20 @@ describe('Hydration', () => {
         "date": "2019/06/22",
         "numOunces": 78
       }
-    ];
+    ]};
 
     hydration = new Hydration(hydrationData);
+
+    
+
+
+
+
+
+
+
+
+
   });
 
   it('should be a function', function () {
