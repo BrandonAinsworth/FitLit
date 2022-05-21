@@ -1,7 +1,10 @@
+import Hydration from "./Hydration";
+
 class User {
   constructor(userDetails) {
     this.user = userDetails[0];
     this.hydrationData = [];
+    this.sortedHydrationData = [];
   };
 
   returnUserFirstName() {
@@ -29,17 +32,13 @@ class User {
   };
 
   returnWeeklyOuncesConsumed() {
-    let banana = this.hydrationData.sort((a, b) => {
+      this.sortedHydrationData = this.hydrationData.sort((a, b) => {
       let dateA = new Date (a.date);
       let dateB = new Date (b.date);
       return dateB - dateA;
     });
 
-    let output = [];
-    for (let i = 0; i < 7; i++) {
-      output.push(banana[i].numOunces);
-    };
-
+    let output = this.sortedHydrationData.filter((point, index) => index < 7);
     return output;
   };
 

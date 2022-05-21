@@ -8,6 +8,7 @@ import {
  } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
+import Hydration from './Hydration';
 
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
@@ -18,6 +19,8 @@ var userEmail = document.querySelector(".user-email");
 var userStepGoal = document.querySelector(".step-goal");
 var userStrideLength = document.querySelector(".stride-length");
 var averageStepGoal = document.querySelector(".average-step-goal");
+var totalDailyOunces = document.querySelector(".total-daily-ounces");
+var weeklyWaterConsumption = document.querySelector(".weekly-water-consumption");
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -25,6 +28,10 @@ var individual;
 var sleepData;
 var activityData;
 var hydrationData;
+var hydrationRepo;
+var weeklyConsumption;
+var dailyConsumption;
+
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
@@ -32,14 +39,18 @@ const getRandomID = () => {
 
 const id = getRandomID();
 
-fetchUsers()
-  .then(data => {
-    userRepo = new UserRepository(data);
-    individual = new User(userRepo.returnSpecificUser(id));
-    getUserInfo(id);
-    compareAverageStepGoal();
-    renderGreeting();
-  });
+function getUsers(){
+    fetchUsers()
+        .then(data => {
+            userRepo = new UserRepository(data);
+            individual = new User(userRepo.returnSpecificUser(id));
+            getUserInfo(id);
+            compareAverageStepGoal();
+            renderGreeting();
+        });
+}
+
+getUsers()
 
 fetchSleep()
   .then(data => {
@@ -56,7 +67,13 @@ fetchActivity()
 fetchHydration()
   .then(data => {
     hydrationData = data;
-    console.log(hydrationData);
+    hydrationRepo = new Hydration(hydrationData);
+    individual.hydrationData.push(hydrationRepo.returnSpecificUser(id));
+    individual.getHydrationData(hydrationRepo);
+    weeklyConsumption = individual.returnWeeklyOuncesConsumed();
+    dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
+    renderWeeklyWaterConsumption(weeklyConsumption);
+    totalDailyOunces.innerText = dailyConsumption;
   });
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
@@ -76,4 +93,13 @@ function renderGreeting() {
 
 function compareAverageStepGoal(){
    averageStepGoal.innerText = `All FitLit Users Average Step Goal: ${userRepo.averageStepGoalAllUsers()}`;
+};
+
+function renderWeeklyWaterConsumption(weeklyConsumption) {
+  let chartOutput = weeklyConsumption.reduce((acc, dailyOunces) => {
+    acc += `${dailyOunces.date}: ${dailyOunces.numOunces} oz.\n`
+    return acc;
+  }, "");
+
+  weeklyWaterConsumption.innerText = chartOutput
 };

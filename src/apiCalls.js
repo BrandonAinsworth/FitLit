@@ -22,6 +22,6 @@ function checkForErrors(response) {
   if (response.ok) {
     return response.json();
   } else {
-    console.log("error")
+    console.log("error");
   }
 };

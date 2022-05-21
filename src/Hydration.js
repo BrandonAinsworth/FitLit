@@ -4,7 +4,8 @@ class Hydration {
   }
 
   returnSpecificUser(id) {
-    return this.allUsersHydrationData.filter((user) => id === user.userID );
+    let hydroFilter = this.allUsersHydrationData.hydrationData.filter((user) => id === user.userID);
+    return hydroFilter
   }
 
 
