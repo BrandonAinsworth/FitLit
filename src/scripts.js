@@ -9,7 +9,7 @@ import {
 import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
-
+import Sleep from './Sleep';
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
 var userFirstName = document.querySelector(".greeting");
@@ -21,21 +21,36 @@ var userStrideLength = document.querySelector(".stride-length");
 var averageStepGoal = document.querySelector(".average-step-goal");
 var totalDailyOunces = document.querySelector(".total-daily-ounces");
 var weeklyWaterConsumption = document.querySelector(".weekly-water-consumption");
+var dailyHoursSlept = document.querySelector(".daily-hours-slept");
+var dailySleepQuality = document.querySelector(".daily-sleep-quality");
+var weeklyHoursSlept = document.querySelector(".weekly-hours-slept");
+var weeklySleepQuality = document.querySelector(".weekly-sleep-quality");
+var allTimeAverageHoursSlept = document.querySelector(".average-hours-slept");
+var allTimeAverageSleepQuality = document.querySelector(".average-sleep-quality");
+
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
 var individual;
 var sleepData;
+var sleepRepo;
 var activityData;
 var hydrationData;
 var hydrationRepo;
 var weeklyConsumption;
 var dailyConsumption;
+var date;
+var startDate;
+var endDate;
 
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
 };
+
+const getRandomDate = ((start, end) => {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+});
 
 const id = getRandomID();
 
@@ -52,17 +67,39 @@ function getUsers(){
 
 getUsers()
 
+function formatDate(startDate, endDate) {
+
+    let randomDate = getRandomDate(new Date(startDate), new Date(endDate));
+    let year = randomDate.getFullYear();
+    let month = randomDate.getMonth();
+    if (month < 10) {
+      month = `0${month}`;
+    }
+    let day = randomDate.getDate();
+    if (day < 10) {
+      day = `0${day}`
+    }
+    return `${year}/${month}/${day}`
+}
+
 fetchSleep()
   .then(data => {
     sleepData = data;
-    // console.log(sleepData);
+    sleepRepo = new Sleep(sleepData);
+    console.log(sleepRepo)
+    individual.getSleepData(sleepRepo);
+    startDate = sleepRepo.allUsersSleepData[0].date;
+    endDate = sleepRepo.allUsersSleepData[sleepRepo.allUsersSleepData.length - 1].date;
+    let myDate = formatDate(startDate, endDate);
+    console.log(myDate)
+    dailyHoursSlept.innerText = `${myDate}: ${individual.returnDailyHoursSlept(myDate)}`
   });
 
-fetchActivity()
-  .then(data => {
-    activityData = data;
-    // console.log(activityData);
-  });
+// fetchActivity()
+//   .then(data => {
+//     activityData = data;
+//     // console.log(activityData);
+//   });
 
 fetchHydration()
   .then(data => {

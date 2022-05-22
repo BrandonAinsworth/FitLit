@@ -8,10 +8,10 @@ export function fetchSleep() {
     .then(response => checkForErrors(response))
 };
 
-export function fetchActivity() {
-  return fetch("https://fitlit-api.herokuapp.com/api/v1/activity")
-    .then(response => checkForErrors(response))
-};
+// export function fetchActivity() {
+//   return fetch("https://fitlit-api.herokuapp.com/api/v1/activity")
+//     .then(response => checkForErrors(response))
+// };
 
 export function fetchHydration() {
   return fetch("https://fitlit-api.herokuapp.com/api/v1/hydration")

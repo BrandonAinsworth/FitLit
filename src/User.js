@@ -55,7 +55,7 @@ class User {
     }, 0);
 
     let averageAllTime = parseFloat((totalHours / this.sleepData.length).toFixed(1));
-    return averageAllTime;    
+    return averageAllTime;
   };
 
   averageSleepQualityAllTime() {
@@ -65,11 +65,14 @@ class User {
     }, 0);
 
     let averageAllTime = parseFloat((totalQuality / this.sleepData.length).toFixed(1));
-    return averageAllTime;    
+    return averageAllTime;
   };
 
   returnDailyHoursSlept(date) {
     let dailyHours = this.sleepData.find(dailyHrs => dailyHrs.date === date)
+    if (dailyHours === undefined) {
+      return 0;
+    }
     return dailyHours.hoursSlept;
   };
 
@@ -87,13 +90,13 @@ class User {
   });
 
   let index = this.sortedSleepData.findIndex((e) => e.date === date);
-  
+
   let output = [];
 
   for (let i = 0; i < 7; i++) {
     output.push(this.sortedSleepData[index + i]);
   }
-  
+
   return output;
 };
 
