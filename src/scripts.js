@@ -23,8 +23,7 @@ var totalDailyOunces = document.querySelector(".total-daily-ounces");
 var weeklyWaterConsumption = document.querySelector(".weekly-water-consumption");
 var dailyHoursSlept = document.querySelector(".daily-hours-slept");
 var dailySleepQuality = document.querySelector(".daily-sleep-quality");
-var weeklyHoursSlept = document.querySelector(".weekly-hours-slept");
-var weeklySleepQuality = document.querySelector(".weekly-sleep-quality");
+var weeklySleepData = document.querySelector(".weekly-sleep-data");
 var allTimeAverageHoursSlept = document.querySelector(".average-hours-slept");
 var allTimeAverageSleepQuality = document.querySelector(".average-sleep-quality");
 
@@ -86,13 +85,17 @@ fetchSleep()
   .then(data => {
     sleepData = data;
     sleepRepo = new Sleep(sleepData);
-    console.log(sleepRepo)
     individual.getSleepData(sleepRepo);
     startDate = sleepRepo.allUsersSleepData[0].date;
     endDate = sleepRepo.allUsersSleepData[sleepRepo.allUsersSleepData.length - 1].date;
     let myDate = formatDate(startDate, endDate);
-    console.log(myDate)
-    dailyHoursSlept.innerText = `${myDate}: ${individual.returnDailyHoursSlept(myDate)}`
+    dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
+    dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
+    individual.returnWeeklySleepData(myDate).forEach(data => {
+        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`
+    })
+    allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`
+    allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`
   });
 
 // fetchActivity()
