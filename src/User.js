@@ -98,10 +98,13 @@ class User {
   }
 
   return output;
-};
+  };
 
-
-
+  returnLatestWeekSleepData() {
+    this.returnWeeklySleepData();
+    let output = this.sortedSleepData.filter((point, index) => index < 7);
+    return output;
+  }
 
 };
 

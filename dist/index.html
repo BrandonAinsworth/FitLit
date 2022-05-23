@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet"> -->
-  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>FitLit</title>
 </head>
   <body>
     <section class="sidebar">
       <div class="sidebar-wrapper">
+        <div class="welcome-to-fitlit">FitLit</div>
         <div class="greeting"></div>
         <div class="todays-date"></div>
         <div class="user-info">
@@ -23,31 +25,33 @@
       </div>
     </section>
     <main>
-      <section class="hydration-widget">
-        <div class="hydration-widget-label">Hydration</div>
-        <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
-        <div class="ounces-wrapper">
+      <section class="hydration-wrapper">
+        <section class="hydration-widget">
+          <div class="hydration-widget-label">Hydration</div>
+          <span class="material-symbols-outlined" id="waterDrop">water_drop</span>
+          <div class="ounces-wrapper">
           <div class="total-daily-ounces"></div>
           <!-- <div class="weekly-average-ounces"></div> -->
-        </div>
-      </section>
-      <section class="hydration-canvas">
-        <div class="hydration-canvas-label">Hydration Latest Week</div>
-        <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
-        <div class="weekly-water-consumption">Canvas</div>
+          </div>
+        </section>
+        <section class="hydration-canvas">
+          <div class="hydration-canvas-label">Hydration Latest Week</div>
+          <span class="material-symbols-outlined">water_drop</span>
+          <div class="weekly-water-consumption">Canvas</div>
+        </section>
       </section>
       <section class="sleep-wrapper">
         <div class="daily-sleep-info">Day<br>
-          <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
+          <span class="material-symbols-outlined">bedtime</span>
           <div class="daily-hours-slept">Daily Hours Slept<br></div>
           <div class="daily-sleep-quality">Daily Sleep Quality<br></div>
         </div>
         <div class="weekly-sleep-info">Week<br>
-          <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
+          <span class="material-symbols-outlined">bedtime</span>
           <div class="weekly-sleep-data">Weekly Sleep Data<br></div>
         </div>
         <div class="all-time-average-sleep-info">All Time
-          <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
+          <span class="material-symbols-outlined">bedtime</span>
           <div class="average-hours-slept">All Time Average Hours Slept<br></div>
           <div class="average-sleep-quality">All Time Average Sleep Quality<br></div>
         </div>
