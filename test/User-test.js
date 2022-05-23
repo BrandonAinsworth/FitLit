@@ -13,7 +13,6 @@ describe('User', () => {
   let currentUserSleep;
   let sleep;
 
-
   beforeEach(() => {
     user =  [
     {
@@ -29,8 +28,7 @@ describe('User', () => {
         24,
         19
       ]
-    },
-    ];
+    }];
 
     currentUserHydration = [
     {
@@ -419,7 +417,7 @@ describe('User', () => {
   });
 
   it(`should return a first name of the user`, () => {
-    expect(currentUser.returnUserFirstName()).to.be.equal('Jarvis')
+    expect(currentUser.returnUserFirstName()).to.be.equal('Jarvis');
   });
 
   it('should save hydration data in an array for a single user', () => {
@@ -475,7 +473,7 @@ describe('User', () => {
   });
 
   it('should return the daily consumption per day for the last 7 days', () => {
-    currentUser.returnWeeklyOuncesConsumed()
+    currentUser.returnWeeklyOuncesConsumed();
     expect(currentUser.sortedHydrationData).to.deep.equal([
       {
         "userID": 2,
@@ -516,7 +514,7 @@ describe('User', () => {
         "userID": 2,
         "date": "2019/06/15",
         "numOunces": 75
-      },
+      }
     ]);
   });
 
@@ -578,7 +576,6 @@ describe('User', () => {
       "sleepQuality": 3.8
     }]);
 
-
     expect(currentUser.returnWeeklySleepData('2019/06/21')).to.deep.equal([{
       "userID": 2,
       "date": "2019/06/21",
@@ -616,4 +613,4 @@ describe('User', () => {
       "sleepQuality": 4.7
     }]);
   });
-});
+})

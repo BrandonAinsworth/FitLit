@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <title>FitLit</title>
 </head>
@@ -27,46 +26,37 @@
     <main>
       <section class="hydration-wrapper">
         <section class="hydration-widget">
-          <div class="hydration-widget-label">Hydration</div>
           <span class="material-symbols-outlined" id="waterDrop">water_drop</span>
+          <div class="hydration-widget-label">Hydration</div>
           <div class="ounces-wrapper">
           <div class="total-daily-ounces"></div>
-          <!-- <div class="weekly-average-ounces"></div> -->
           </div>
         </section>
         <section class="hydration-canvas">
-          <div class="hydration-canvas-label">Hydration Latest Week</div>
           <span class="material-symbols-outlined">water_drop</span>
+          <div class="hydration-canvas-label">Hydration Latest Week:</div>
           <div class="weekly-water-consumption">Canvas</div>
         </section>
       </section>
       <section class="sleep-wrapper">
-        <div class="daily-sleep-info">Day<br>
+        <div class="daily-sleep-info"><br>
           <span class="material-symbols-outlined">bedtime</span>
+          <div>Daily Sleep Data:</div>
           <div class="daily-hours-slept">Daily Hours Slept<br></div>
           <div class="daily-sleep-quality">Daily Sleep Quality<br></div>
         </div>
-        <div class="weekly-sleep-info">Week<br>
+        <div class="weekly-sleep-info"><br>
           <span class="material-symbols-outlined">bedtime</span>
-          <div class="weekly-sleep-data">Weekly Sleep Data<br></div>
+          <div class="weekly-sleep-data">Weekly Sleep Data:<br></div>
         </div>
-        <div class="all-time-average-sleep-info">All Time
-          <span class="material-symbols-outlined">bedtime</span>
+        <div class="all-time-average-sleep-info">
+          <span class="material-symbols-outlined" id="moon">bedtime</span><br>
+          <div>All Time Sleep Data:</div>
           <div class="average-hours-slept">All Time Average Hours Slept<br></div>
           <div class="average-sleep-quality">All Time Average Sleep Quality<br></div>
         </div>
       </section>
-      <!-- <section class="step-tracker">
-        <img src="./images/turing-logo.png" alt="turing logo" height="20px" width="20px">
-        <div class="step-info">
-          <div class="step-goal"></div>
-          <div class="daily-step-count"></div>
-          <div class="weekly-average-step-count"></div>
-        </div>
-      </section> -->
     </main>
-
-<!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
   </body>
 </html>
