@@ -10,7 +10,7 @@ function checkForErrors(response) {
     return response.json();
   } else {
     console.log("error");
-    // Give user feedback when error exists.
+    window.alert('Error: Please refresh the page.');
   }
 };
 
