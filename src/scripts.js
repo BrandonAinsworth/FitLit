@@ -1,3 +1,6 @@
+
+
+
 import './css/styles.css';
 import './images/turing-logo.png'
 import {
@@ -113,7 +116,7 @@ fetchHydration()
     weeklyConsumption = individual.returnWeeklyOuncesConsumed();
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
     renderWeeklyWaterConsumption(weeklyConsumption);
-    totalDailyOunces.innerText = dailyConsumption;
+    totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
   });
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
