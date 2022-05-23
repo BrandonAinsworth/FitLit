@@ -132,17 +132,6 @@ describe('Hydration', () => {
     ]};
 
     hydration = new Hydration(hydrationData);
-
-    
-
-
-
-
-
-
-
-
-
   });
 
   it('should be a function', function () {
@@ -202,4 +191,4 @@ describe('Hydration', () => {
     ];
     expect(hydration.returnSpecificUser(2)).to.deep.equal(output);
   });
-});
+})

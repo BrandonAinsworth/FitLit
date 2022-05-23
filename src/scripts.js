@@ -1,8 +1,4 @@
-
-
-
 import './css/styles.css';
-import './images/turing-logo.png'
 import { promise } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
@@ -25,7 +21,6 @@ var weeklySleepData = document.querySelector(".weekly-sleep-data");
 var allTimeAverageHoursSlept = document.querySelector(".average-hours-slept");
 var allTimeAverageSleepQuality = document.querySelector(".average-sleep-quality");
 
-
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
 var individual;
@@ -35,22 +30,15 @@ var hydrationData;
 var hydrationRepo;
 var weeklyConsumption;
 var dailyConsumption;
-// var startDate;
-// var endDate;
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
-};
-
-const getRandomDate = ((start, end) => {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-});
+}
 
 const id = getRandomID();
 
 function getData(){
   promise.then(data => {
-    console.log(data)
 
     userRepo = new UserRepository(data[0]);
     individual = new User(userRepo.returnSpecificUser(id));
@@ -67,33 +55,22 @@ function getData(){
     renderWeeklyWaterConsumption(weeklyConsumption);
     totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
 
-
     sleepData = data[1];
     sleepRepo = new Sleep(sleepData);
     individual.getSleepData(sleepRepo);
     let latestWeekSleepData = individual.returnLatestWeekSleepData();
-    // startDate = sleepRepo.allUsersSleepData[0].date;
-    // endDate = sleepRepo.allUsersSleepData[sleepRepo.allUsersSleepData.length - 1].date;
-    // let myDate = formatDate(startDate, endDate);
     let myDate = latestWeekSleepData[0].date;
-    console.log(myDate);
     dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
     dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
     individual.returnWeeklySleepData(myDate).forEach(data => {
-        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`
-    })
-    allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`
-    allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`
-
-  })};
+        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
+    });
+    allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
+    allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
+  });
+}
 
 getData()
-
-// fetchActivity()
-//   .then(data => {
-//     activityData = data;
-//     // console.log(activityData);
-//   });
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getUserInfo(id) {
@@ -104,37 +81,21 @@ function getUserInfo(id) {
     userStrideLength.innerText = `Stride Length: ${currentUser[0].strideLength}ft`;
     userStepGoal.innerText = `Your Step Goal: ${currentUser[0].dailyStepGoal}`;
     return currentUser;
-};
+}
 
 function renderGreeting() {
-   userFirstName.innerText = `Hello, ${individual.returnUserFirstName()}!`
-};
+   userFirstName.innerText = `Hello, ${individual.returnUserFirstName()}!`;
+}
 
 function compareAverageStepGoal(){
    averageStepGoal.innerText = `All FitLit Users Average Step Goal: ${userRepo.averageStepGoalAllUsers()}`;
-};
+}
 
 function renderWeeklyWaterConsumption(weeklyConsumption) {
   let chartOutput = weeklyConsumption.reduce((acc, dailyOunces) => {
-    acc += `${dailyOunces.date}: ${dailyOunces.numOunces} oz.\n`
+    acc += `${dailyOunces.date}: ${dailyOunces.numOunces} oz.\n`;
     return acc;
   }, "");
 
-  weeklyWaterConsumption.innerText = chartOutput
-};
-
-
-function formatDate(startDate, endDate) {
-
-  let randomDate = getRandomDate(new Date(startDate), new Date(endDate));
-  let year = randomDate.getFullYear();
-  let month = randomDate.getMonth();
-  if (month < 10) {
-    month = `0${month}`;
-  }
-  let day = randomDate.getDate();
-  if (day < 10) {
-    day = `0${day}`
-  }
-  return `${year}/${month}/${day}`
+  weeklyWaterConsumption.innerText = chartOutput;
 }

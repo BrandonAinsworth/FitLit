@@ -157,7 +157,6 @@ describe('Sleep Test', () => {
     };
 
     sleep = new Sleep(sleepData);
-
   });
 
   it('should be a function',() => {
@@ -227,7 +226,6 @@ describe('Sleep Test', () => {
   });
 
   it('should calculate the average sleep quality for all user\'s', () => {
-    expect(sleep.averageSleepQualityAllUsers()).to.be.equal(3.1)
+    expect(sleep.averageSleepQualityAllUsers()).to.be.equal(3.1);
   });
-
-});
+})
