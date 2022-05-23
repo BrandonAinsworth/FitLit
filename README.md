@@ -15,12 +15,9 @@
 
 In this project, we fetched data from an API with user, activity, hydration and sleep data for many users over many days. Think of something like Fitbit. Fitbit devices log data and present it on a dashboard for their users. Our goal is to present a useful dashboard for a user to view and see their latest activity data, goals, and milestones. 
 
+![Screen Shot 2022-05-23 at 5 22 34 PM](https://user-images.githubusercontent.com/99693359/169908245-028be8fd-3be5-4c14-a0bf-83a959c6d3a9.png)
+
 The [Turing School of Software and Design](https://turing.edu/) provided a project spec sheet for students to follow which can be found [here](https://frontend.turing.edu/projects/Fitlit-part-one.html).
-
-
-## Screenshot of FitLit
-
-
 
 ## Learning Goals
 
