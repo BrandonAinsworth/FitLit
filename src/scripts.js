@@ -3,12 +3,7 @@
 
 import './css/styles.css';
 import './images/turing-logo.png'
-import {
-  fetchUsers,
-  fetchSleep,
-  fetchActivity,
-  fetchHydration
- } from './apiCalls'
+import { promise } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
@@ -36,15 +31,12 @@ var userRepo;
 var individual;
 var sleepData;
 var sleepRepo;
-var activityData;
 var hydrationData;
 var hydrationRepo;
 var weeklyConsumption;
 var dailyConsumption;
-var date;
-var startDate;
-var endDate;
-
+// var startDate;
+// var endDate;
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
@@ -56,60 +48,17 @@ const getRandomDate = ((start, end) => {
 
 const id = getRandomID();
 
-function getUsers(){
-    fetchUsers()
-        .then(data => {
-            userRepo = new UserRepository(data);
-            individual = new User(userRepo.returnSpecificUser(id));
-            getUserInfo(id);
-            compareAverageStepGoal();
-            renderGreeting();
-        });
-}
+function getData(){
+  promise.then(data => {
+    console.log(data)
 
-getUsers()
+    userRepo = new UserRepository(data[0]);
+    individual = new User(userRepo.returnSpecificUser(id));
+    getUserInfo(id);
+    compareAverageStepGoal();
+    renderGreeting();
 
-function formatDate(startDate, endDate) {
-
-    let randomDate = getRandomDate(new Date(startDate), new Date(endDate));
-    let year = randomDate.getFullYear();
-    let month = randomDate.getMonth();
-    if (month < 10) {
-      month = `0${month}`;
-    }
-    let day = randomDate.getDate();
-    if (day < 10) {
-      day = `0${day}`
-    }
-    return `${year}/${month}/${day}`
-}
-
-fetchSleep()
-  .then(data => {
-    sleepData = data;
-    sleepRepo = new Sleep(sleepData);
-    individual.getSleepData(sleepRepo);
-    startDate = sleepRepo.allUsersSleepData[0].date;
-    endDate = sleepRepo.allUsersSleepData[sleepRepo.allUsersSleepData.length - 1].date;
-    let myDate = formatDate(startDate, endDate);
-    dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
-    dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
-    individual.returnWeeklySleepData(myDate).forEach(data => {
-        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`
-    })
-    allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`
-    allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`
-  });
-
-// fetchActivity()
-//   .then(data => {
-//     activityData = data;
-//     // console.log(activityData);
-//   });
-
-fetchHydration()
-  .then(data => {
-    hydrationData = data;
+    hydrationData = data[2];
     hydrationRepo = new Hydration(hydrationData);
     individual.hydrationData.push(hydrationRepo.returnSpecificUser(id));
     individual.getHydrationData(hydrationRepo);
@@ -117,7 +66,34 @@ fetchHydration()
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
     renderWeeklyWaterConsumption(weeklyConsumption);
     totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
-  });
+
+
+    sleepData = data[1];
+    sleepRepo = new Sleep(sleepData);
+    individual.getSleepData(sleepRepo);
+    let latestWeekSleepData = individual.returnLatestWeekSleepData();
+    // startDate = sleepRepo.allUsersSleepData[0].date;
+    // endDate = sleepRepo.allUsersSleepData[sleepRepo.allUsersSleepData.length - 1].date;
+    // let myDate = formatDate(startDate, endDate);
+    let myDate = latestWeekSleepData[0].date;
+    console.log(myDate);
+    dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
+    dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
+    individual.returnWeeklySleepData(myDate).forEach(data => {
+        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`
+    })
+    allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`
+    allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`
+
+  })};
+
+getData()
+
+// fetchActivity()
+//   .then(data => {
+//     activityData = data;
+//     // console.log(activityData);
+//   });
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getUserInfo(id) {
@@ -146,3 +122,19 @@ function renderWeeklyWaterConsumption(weeklyConsumption) {
 
   weeklyWaterConsumption.innerText = chartOutput
 };
+
+
+function formatDate(startDate, endDate) {
+
+  let randomDate = getRandomDate(new Date(startDate), new Date(endDate));
+  let year = randomDate.getFullYear();
+  let month = randomDate.getMonth();
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  let day = randomDate.getDate();
+  if (day < 10) {
+    day = `0${day}`
+  }
+  return `${year}/${month}/${day}`
+}
