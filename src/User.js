@@ -88,11 +88,7 @@ class User {
 
     let index = this.sortedSleepData.findIndex((e) => e.date === date);
 
-    let output = [];
-
-    for (let i = 0; i < 7; i++) {
-      output.push(this.sortedSleepData[index + i]);
-    }
+    let output = this.sortedSleepData.slice(index, index + 7)
 
     return output;
   }
