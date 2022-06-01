@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import Sleep from '../src/Sleep';
 import { 
   sleepSampleData, 
-  userOutput 
+  currentUserSleep
 } from './Sample-sleep-data';
 
 describe('Sleep Test', () => {
@@ -29,7 +29,7 @@ describe('Sleep Test', () => {
   });
 
   it('should return an array of a single user\'s data', () => {
-    expect(sleep.returnSpecificUser(2)).to.deep.equal(userOutput);
+    expect(sleep.returnSpecificUser(2)).to.deep.equal(currentUserSleep);
   });
 
   it('should calculate the average sleep quality for all user\'s', () => {

@@ -147,7 +147,7 @@ const sleepSampleData = {
   ]
 };
 
-let userOutput = [
+let currentUserSleep = [
   {
     "userID": 2,
     "date": "2019/06/15",
@@ -200,5 +200,5 @@ let userOutput = [
 
 export {
   sleepSampleData, 
-  userOutput
+  currentUserSleep
 }
