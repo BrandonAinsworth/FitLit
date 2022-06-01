@@ -32,6 +32,4 @@ describe ('Activity', () => {
     expect(activity.returnSpecificUser(4)).to.be.equal("User not found");
   });
 
-
-
 })
