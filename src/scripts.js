@@ -45,32 +45,41 @@ function getData(){
     getUserInfo(id);
     compareAverageStepGoal();
     renderGreeting();
-
-    hydrationData = data[2];
-    hydrationRepo = new Hydration(hydrationData);
-    individual.hydrationData.push(hydrationRepo.returnSpecificUser(id));
-    individual.getHydrationData(hydrationRepo);
-    weeklyConsumption = individual.returnWeeklyOuncesConsumed();
-    dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
-    renderWeeklyWaterConsumption(weeklyConsumption);
-    totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
-
-    sleepData = data[1];
-    sleepRepo = new Sleep(sleepData);
-    individual.getSleepData(sleepRepo);
-    let latestWeekSleepData = individual.returnLatestWeekSleepData();
-    let myDate = latestWeekSleepData[0].date;
-    dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
-    dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
-    individual.returnWeeklySleepData(myDate).forEach(data => {
-        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
-    });
-    allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
-    allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
+    updateHydration(data[2]);
+    updateSleep(data[1]);
+    
   });
 }
 
 getData()
+
+function updateHydration(data){
+  hydrationData = data;
+  hydrationRepo = new Hydration(hydrationData);
+  individual.hydrationData.push(hydrationRepo.returnSpecificUser(id));
+  individual.getHydrationData(hydrationRepo);
+  weeklyConsumption = individual.returnWeeklyOuncesConsumed();
+  dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
+  renderWeeklyWaterConsumption(weeklyConsumption);
+  totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
+}
+
+function updateSleep(data) {
+  sleepData = data;
+  sleepRepo = new Sleep(sleepData);
+  individual.getSleepData(sleepRepo);
+  let latestWeekSleepData = individual.returnLatestWeekSleepData();
+  let myDate = latestWeekSleepData[0].date;
+  dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
+  dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
+  individual.returnWeeklySleepData(myDate).forEach(data => {
+      weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
+  });
+  allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
+  allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
+
+}
+
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getUserInfo(id) {
