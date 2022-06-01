@@ -38,14 +38,6 @@ The [Turing School of Software and Design](https://turing.edu/) provided a proje
 * Chai
 * NPM
 * Webpack
-* Atom
-* VS Code
-* Git
-* Github
-* GitHub Projects
-* Agile
-* MacOS Terminal
-* Google Chrome Dev Tools
 
 ## Project Reflections
 
@@ -60,7 +52,7 @@ The [Turing School of Software and Design](https://turing.edu/) provided a proje
 * Integrating `Promise.all()`
 * Manipulation of multiple datasets
 * Creating a user interface to reflect our datasets on the DOM
-* We were successful in planning and executing those plans, and followed our wireframe, DTR, and project board to meet the requirements of our MVP.
+* We were successful in planning and executing those plans, and followed our wireframe, sticking to our Define the Relationship document, and project board to meet the requirements of our MVP.
 * Collaborated well as a team and leveraged active-listening and effective communication to our advantage.
 
 ## Roadmap
@@ -82,8 +74,9 @@ Coming in Part 2!
 1. Fork this repo - on the top right corner of this page, click the **Fork** button.
 2. Clone down the _forked_ repo. 
 3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-4. Run `npm start` in the terminal, to see the HTML page `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use. 
-5. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version. 
+4. Run `npm start` in the terminal, to see the HTML page `Control + C` is the command to stop running the local server.  Closing the terminal without stopping the server first could allow the server to continue to run in the background and cause problems. This command is not specific to Webpack; make note of it for future use.
+5. Open a browser window and go to http://localHost:8080 to view the website
+6. Do not run `npm audit fix --force`.  This will update to the latest version of packages.  We need to be using `webpack-dev-server@3.11.2` which is not the latest version. 
 
 ## Contributors
 
@@ -105,6 +98,5 @@ Coming in Part 2!
 * [Stack Overflow](https://stackoverflow.com/)
 * [W3-Schools](https://www.w3schools.com/)
 * [YouTube - WebPack](https://www.youtube.com/watch?v=GU-2T7k9NfI)
-* Rocks - [Artan Myrtolli](https://github.com/artanmyrtolli)
-* Mentors - [Matt Roden](https://github.com/Matt-Roden), [Nate Ewert-Krocker](https://github.com/NEwertKrocker), [David Engel](https://github.com/David5280)
-* And a huge shout out to Cohort 2203!
+* Mentors - [Artan Myrtolli](https://github.com/artanmyrtolli), [David Engel](https://github.com/David5280), [Matt Roden](https://github.com/Matt-Roden), [Nate Ewert-Krocker](https://github.com/NEwertKrocker)
+* And a huge shout out to our fellow Turing cohort members!
