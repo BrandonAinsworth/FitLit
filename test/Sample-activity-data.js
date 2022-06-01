@@ -171,63 +171,62 @@ const activitySampleData = {
 
 const currentUserActivity = [
   {
-    "userID": 3,
+    "userID": 2,
     "date": "2019/06/15",
-    "numSteps": 7402,
-    "minutesActive": 116,
-    "flightsOfStairs": 33
+    "numSteps": 4294,
+    "minutesActive": 138,
+    "flightsOfStairs": 10
   },
   {
-    "userID": 3,
+    "userID": 2,
     "date": "2019/06/16",
-    "numSteps": 12304,
-    "minutesActive": 152,
-    "flightsOfStairs": 8
+    "numSteps": 4112,
+    "minutesActive": 220,
+    "flightsOfStairs": 37
   },
   {
-    "userID": 3,
+    "userID": 2,
     "date": "2019/06/17",
-    "numSteps": 4547,
-    "minutesActive": 97,
-    "flightsOfStairs": 5
+    "numSteps": 13750,
+    "minutesActive": 65,
+    "flightsOfStairs": 4
   },
   {
-    "userID": 3,
+    "userID": 2,
     "date": "2019/06/18",
-    "numSteps": 2546,
-    "minutesActive": 274,
+    "numSteps": 4662,
+    "minutesActive": 181,
+    "flightsOfStairs": 31
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/19",
+    "numSteps": 9858,
+    "minutesActive": 243,
+    "flightsOfStairs": 44
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/20",
+    "numSteps": 8153,
+    "minutesActive": 74,
+    "flightsOfStairs": 10
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/21",
+    "numSteps": 10225,
+    "minutesActive": 174,
     "flightsOfStairs": 26
   },
   {
-    "userID": 3,
-    "date": "2019/06/19",
-    "numSteps": 10961,
-    "minutesActive": 188,
-    "flightsOfStairs": 17
-  },
-  {
-    "userID": 3,
-    "date": "2019/06/20",
-    "numSteps": 5369,
-    "minutesActive": 129,
-    "flightsOfStairs": 46
-  },
-  {
-    "userID": 3,
-    "date": "2019/06/21",
-    "numSteps": 7498,
-    "minutesActive": 199,
-    "flightsOfStairs": 13
-  },
-  {
-    "userID": 3,
+    "userID": 2,
     "date": "2019/06/22",
-    "numSteps": 11342,
-    "minutesActive": 53,
-    "flightsOfStairs": 17
-  }
+    "numSteps": 3605,
+    "minutesActive": 124,
+    "flightsOfStairs": 31
+  },
 ];
-
 
 export {
   activitySampleData,

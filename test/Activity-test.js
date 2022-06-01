@@ -25,7 +25,7 @@ describe ('Activity', () => {
   });
 
   it('should return an array of a single user\s data', () => {
-    expect(activity.returnSpecificUser(3)).to.deep.equal(currentUserActivity);
+    expect(activity.returnSpecificUser(2)).to.deep.equal(currentUserActivity);
   });
 
   it('should return "User not Found" if user does not have any data', () => {
