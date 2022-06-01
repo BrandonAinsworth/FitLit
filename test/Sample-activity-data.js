@@ -167,7 +167,7 @@ const activitySampleData = {
     "minutesActive": 53,
     "flightsOfStairs": 17
   }
-];
+]};
 
 const currentUserActivity = [
   {
