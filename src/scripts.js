@@ -20,6 +20,7 @@ var dailySleepQuality = document.querySelector(".daily-sleep-quality");
 var weeklySleepData = document.querySelector(".weekly-sleep-data");
 var allTimeAverageHoursSlept = document.querySelector(".average-hours-slept");
 var allTimeAverageSleepQuality = document.querySelector(".average-sleep-quality");
+var catchError = document.querySelector(".catch-error");
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -48,6 +49,10 @@ function getData(){
     updateHydration(data[2]);
     updateSleep(data[1]);
     
+  })
+  .catch(error => {
+    console.log(error)
+    catchError.innerText = 'We have encountered an error retrieving your data.'
   });
 }
 
