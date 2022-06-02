@@ -53,7 +53,7 @@ function getData(){
   .catch(error => {
     console.log(error)
     catchError.innerText = 'We have encountered an error retrieving your data.'
-  });
+  }); 
 }
 
 getData()

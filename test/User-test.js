@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import User from '../src/User';
 import Hydration from '../src/Hydration';
 import Sleep from '../src/Sleep';
+import Activity from '../src/Activity';
 import { 
   hydrationSampleData, 
   userOutput
@@ -17,21 +18,30 @@ import {
   userSampleWeeklyHydration, 
   userSampleHydration
 } from './Sample-user-data';
+import {
+  activitySampleData,
+  currentUserActivity
+} from './Sample-activity-data';
 
 describe('User', () => {
 
   let hydration;
   let currentUser;
   let sleep;
+  let activity;
 
   beforeEach(() => {
 
     currentUser = new User(userSampleData);
+
     hydration = new Hydration(hydrationSampleData);
     currentUser.getHydrationData(hydration);
 
     sleep = new Sleep(sleepSampleData);
     currentUser.getSleepData(sleep);
+
+    activity = new Activity(activitySampleData)
+    currentUser.getActivityData(activity)
     
   });
 
@@ -97,4 +107,14 @@ describe('User', () => {
 
     expect(currentUser.returnWeeklySleepData('2019/06/21')).to.deep.equal(userSampleWeeklySleepData);
   });
+
+  it('should save activity data in an array for a single user', () => {
+    expect(currentUser.activityData).to.deep.equal(currentUserActivity);
+  });
+
+  it('should return the miles a user has walked based on their number of steps', () => {
+    
+
+  });
+
 })

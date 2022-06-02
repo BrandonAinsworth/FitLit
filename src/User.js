@@ -5,6 +5,7 @@ class User {
     this.sortedHydrationData = [];
     this.sleepData = [];
     this.sortedSleepData = [];
+    this.activityData = [];
   }
 
   returnUserFirstName() {
@@ -98,6 +99,16 @@ class User {
     let output = this.sortedSleepData.filter((point, index) => index < 7);
     return output;
   }
+
+  getActivityData(allUsersActivityData){
+    this.activityData = allUsersActivityData.returnSpecificUser(this.user.id);
+  }
+
+// returnUserMilesWalked(){
+
+
+// }
+
 }
 
 export default User;
