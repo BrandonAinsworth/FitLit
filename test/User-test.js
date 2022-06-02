@@ -113,8 +113,8 @@ describe('User', () => {
   });
 
   it('should return the miles a user has walked based on their number of steps', () => {
-    
-
+    expect(currentUser.returnUserMilesWalked('2019/06/19')).to.be.equal(8.4);
+    expect(currentUser.returnUserMilesWalked('2019/06/22')).to.be.equal(3.1);
   });
 
 })

@@ -104,10 +104,10 @@ class User {
     this.activityData = allUsersActivityData.returnSpecificUser(this.user.id);
   }
 
-// returnUserMilesWalked(){
-
-
-// }
+  returnUserMilesWalked(date){
+    let dailySteps = this.activityData.find(elem => elem.date === date)
+    return parseFloat(((dailySteps.numSteps * this.user.strideLength) / 5280).toFixed(1));
+  }
 
 }
 
