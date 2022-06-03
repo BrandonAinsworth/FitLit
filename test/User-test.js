@@ -16,13 +16,16 @@ import {
   userSampleWeeklySleepData,
   userSampleWeeklySleep2, 
   userSampleWeeklyHydration, 
-  userSampleHydration
+  userSampleHydration,
+  stepGoalSuccess,
+  stepGoalFailure
 } from './Sample-user-data';
 import {
   activitySampleData,
   currentUserActivity,
   userSampleWeeklyActivityData,
-  userSampleWeeklyActivityData2
+  userSampleWeeklyActivityData2,
+  
 } from './Sample-activity-data';
 
 describe('User', () => {
@@ -42,8 +45,8 @@ describe('User', () => {
     sleep = new Sleep(sleepSampleData);
     currentUser.getSleepData(sleep);
 
-    activity = new Activity(activitySampleData)
-    currentUser.getActivityData(activity)
+    activity = new Activity(activitySampleData);
+    currentUser.getActivityData(activity);
     
   });
 
@@ -124,6 +127,10 @@ describe('User', () => {
     expect(currentUser.returnMinutesActive('2019/06/21')).to.be.equal(174);
   });
 
+  it('should return an array of sorted activity data', () => {
+  expect(currentUser.sortActivityData()).to.deep.equal(currentUserActivity.reverse())
+  });
+
   it('should return average minutes active for a user for a given week', () => {
     expect(currentUser.returnWeeklyAvgMinutesActive('2019/06/21')).to.be.equal(156.4);
   });
@@ -133,6 +140,13 @@ describe('User', () => {
     expect(currentUser.compareToStepGoal('2019/06/22')).to.be.equal(false);
   });
 
-  
+  it('should return an array of all the days where a user exceeded their step goal', () => {
+    expect(currentUser.returnAllDaysStepGoalExceeded()).to.deep.equal(stepGoalSuccess);
+  });
 
-})
+  it('should notify the user they have never reached their goal', () => {
+    currentUser.activityData = stepGoalFailure;
+    expect(currentUser.returnAllDaysStepGoalExceeded()).to.be.equal("Goal not met");
+  });
+
+});

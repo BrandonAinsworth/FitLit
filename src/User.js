@@ -120,12 +120,16 @@ class User {
     }
     return dailyMinutes.minutesActive;
   }
-  returnWeeklyAvgMinutesActive(date){
-    this.sortedActivityData = this.activityData.sort((a, b) => {
+
+  sortActivityData(){
+    return this.sortedActivityData = this.activityData.sort((a, b) => {
       let dateA = new Date (a.date);
       let dateB = new Date (b.date);
       return dateB - dateA;
     });
+  }
+  returnWeeklyAvgMinutesActive(date){
+    this.sortActivityData()
 
     let index = this.sortedActivityData.findIndex((e) => e.date === date);
 
@@ -137,6 +141,7 @@ class User {
     },0);
     return parseFloat((total / output.length).toFixed(1));
   }
+
   compareToStepGoal(date){
 
     let todaysSteps = this.activityData.find(elem => elem.date === date)
@@ -146,6 +151,17 @@ class User {
     }
     return false
   }
+
+  returnAllDaysStepGoalExceeded(){
+    this.sortActivityData();
+      let daysMet = this.sortedActivityData.filter(daily => this.user.dailyStepGoal <= daily.numSteps);
+      if(daysMet.length === 0){
+        return 'Goal not met'
+      } 
+      return daysMet;     
+  }
 }
+
+
 
 export default User;
