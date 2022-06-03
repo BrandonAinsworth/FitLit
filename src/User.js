@@ -5,6 +5,8 @@ class User {
     this.sortedHydrationData = [];
     this.sleepData = [];
     this.sortedSleepData = [];
+    this.activityData = [];
+    this.sortedActivityData = [];
   }
 
   returnUserFirstName() {
@@ -98,6 +100,68 @@ class User {
     let output = this.sortedSleepData.filter((point, index) => index < 7);
     return output;
   }
+
+  getActivityData(allUsersActivityData){
+    this.activityData = allUsersActivityData.returnSpecificUser(this.user.id);
+  }
+
+  returnUserMilesWalked(date){
+    let dailySteps = this.activityData.find(elem => elem.date === date)
+    if(dailySteps === undefined){
+      return 'No data'
+    }
+    return parseFloat(((dailySteps.numSteps * this.user.strideLength) / 5280).toFixed(1));
+  }
+
+  returnMinutesActive(date){
+    let dailyMinutes = this.activityData.find(elem => elem.date === date)
+    if(dailyMinutes === undefined){
+      return 'No data'
+    }
+    return dailyMinutes.minutesActive;
+  }
+
+  sortActivityData(){
+    return this.sortedActivityData = this.activityData.sort((a, b) => {
+      let dateA = new Date (a.date);
+      let dateB = new Date (b.date);
+      return dateB - dateA;
+    });
+  }
+  returnWeeklyAvgMinutesActive(date){
+    this.sortActivityData()
+
+    let index = this.sortedActivityData.findIndex((e) => e.date === date);
+
+    let output = this.sortedActivityData.slice(index, index + 7)
+
+    let total = output.reduce((acc, elem) => {
+      acc += elem.minutesActive
+      return acc
+    },0);
+    return parseFloat((total / output.length).toFixed(1));
+  }
+
+  compareToStepGoal(date){
+
+    let todaysSteps = this.activityData.find(elem => elem.date === date)
+
+    if(this.user.dailyStepGoal <= todaysSteps.numSteps){
+      return true
+    }
+    return false
+  }
+
+  returnAllDaysStepGoalExceeded(){
+    this.sortActivityData();
+      let daysMet = this.sortedActivityData.filter(daily => this.user.dailyStepGoal <= daily.numSteps);
+      if(daysMet.length === 0){
+        return 'Goal not met'
+      } 
+      return daysMet;     
+  }
 }
+
+
 
 export default User;

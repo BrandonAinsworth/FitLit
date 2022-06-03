@@ -10,6 +10,7 @@ class Activity {
     }
     return `User not found`
   }
+  
 };
 
 export default Activity;

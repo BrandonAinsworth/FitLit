@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import User from '../src/User';
 import Hydration from '../src/Hydration';
 import Sleep from '../src/Sleep';
+import Activity from '../src/Activity';
 import { 
   hydrationSampleData, 
   userOutput
@@ -15,23 +16,37 @@ import {
   userSampleWeeklySleepData,
   userSampleWeeklySleep2, 
   userSampleWeeklyHydration, 
-  userSampleHydration
+  userSampleHydration,
+  stepGoalSuccess,
+  stepGoalFailure
 } from './Sample-user-data';
+import {
+  activitySampleData,
+  currentUserActivity,
+  userSampleWeeklyActivityData,
+  userSampleWeeklyActivityData2,
+  
+} from './Sample-activity-data';
 
 describe('User', () => {
 
   let hydration;
   let currentUser;
   let sleep;
+  let activity;
 
   beforeEach(() => {
 
     currentUser = new User(userSampleData);
+
     hydration = new Hydration(hydrationSampleData);
     currentUser.getHydrationData(hydration);
 
     sleep = new Sleep(sleepSampleData);
     currentUser.getSleepData(sleep);
+
+    activity = new Activity(activitySampleData);
+    currentUser.getActivityData(activity);
     
   });
 
@@ -97,4 +112,41 @@ describe('User', () => {
 
     expect(currentUser.returnWeeklySleepData('2019/06/21')).to.deep.equal(userSampleWeeklySleepData);
   });
-})
+
+  it('should save activity data in an array for a single user', () => {
+    expect(currentUser.activityData).to.deep.equal(currentUserActivity);
+  });
+
+  it('should return the miles a user has walked based on their number of steps', () => {
+    expect(currentUser.returnUserMilesWalked('2019/06/19')).to.be.equal(8.4);
+    expect(currentUser.returnUserMilesWalked('2019/06/22')).to.be.equal(3.1);
+  });
+
+  it('should return how many minutes a user was active specified by date', () => {
+    expect(currentUser.returnMinutesActive('2019/06/20')).to.be.equal(74);
+    expect(currentUser.returnMinutesActive('2019/06/21')).to.be.equal(174);
+  });
+
+  it('should return an array of sorted activity data', () => {
+  expect(currentUser.sortActivityData()).to.deep.equal(currentUserActivity.reverse())
+  });
+
+  it('should return average minutes active for a user for a given week', () => {
+    expect(currentUser.returnWeeklyAvgMinutesActive('2019/06/21')).to.be.equal(156.4);
+  });
+
+  it('should return a boolean value indicating whether or not a user achieved their step goal', () => {
+    expect(currentUser.compareToStepGoal('2019/06/17')).to.be.equal(true);
+    expect(currentUser.compareToStepGoal('2019/06/22')).to.be.equal(false);
+  });
+
+  it('should return an array of all the days where a user exceeded their step goal', () => {
+    expect(currentUser.returnAllDaysStepGoalExceeded()).to.deep.equal(stepGoalSuccess);
+  });
+
+  it('should notify the user they have never reached their goal', () => {
+    currentUser.activityData = stepGoalFailure;
+    expect(currentUser.returnAllDaysStepGoalExceeded()).to.be.equal("Goal not met");
+  });
+
+});
