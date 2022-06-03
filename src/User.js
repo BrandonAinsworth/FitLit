@@ -160,6 +160,12 @@ class User {
       } 
       return daysMet;     
   }
+
+  findAllTimeStairClimbingRecord() {
+    this.activityData.sort((a,b) => b.flightsOfStairs - a.flightsOfStairs);
+
+    return this.activityData[0].flightsOfStairs;
+  }
 }
 
 

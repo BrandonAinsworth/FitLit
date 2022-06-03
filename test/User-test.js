@@ -149,4 +149,9 @@ describe('User', () => {
     expect(currentUser.returnAllDaysStepGoalExceeded()).to.be.equal("Goal not met");
   });
 
+  it('should return the all time stair climbing record', () => {
+    expect(currentUser.findAllTimeStairClimbingRecord()).to.be.equal(44);
+  });
+
+
 });
