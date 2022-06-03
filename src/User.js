@@ -135,8 +135,16 @@ class User {
       acc += elem.minutesActive
       return acc
     },0);
-    console.log(output)
     return parseFloat((total / output.length).toFixed(1));
+  }
+  compareToStepGoal(date){
+
+    let todaysSteps = this.activityData.find(elem => elem.date === date)
+
+    if(this.user.dailyStepGoal <= todaysSteps.numSteps){
+      return true
+    }
+    return false
   }
 }
 

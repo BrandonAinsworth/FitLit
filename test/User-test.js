@@ -126,7 +126,13 @@ describe('User', () => {
 
   it('should return average minutes active for a user for a given week', () => {
     expect(currentUser.returnWeeklyAvgMinutesActive('2019/06/21')).to.be.equal(156.4);
-
   });
+
+  it('should return a boolean value indicating whether or not a user achieved their step goal', () => {
+    expect(currentUser.compareToStepGoal('2019/06/17')).to.be.equal(true);
+    expect(currentUser.compareToStepGoal('2019/06/22')).to.be.equal(false);
+  });
+
+  
 
 })
