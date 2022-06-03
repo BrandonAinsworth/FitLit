@@ -46,5 +46,13 @@ describe ('Activity', () => {
 
   });
 
+  it('should calculate the average number of minutes active for a specific date for all users', () => {
+
+    expect(activity.averageAllUsersMinutesByDate('2019/06/15')).to.be.equal(131);
+    expect(activity.averageAllUsersMinutesByDate('2019/06/22')).to.be.equal(99);
+
+  });
+
+
 
 })

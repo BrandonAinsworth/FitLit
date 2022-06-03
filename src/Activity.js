@@ -33,7 +33,16 @@ class Activity {
     return parseInt((totalSteps / matchingDates.length).toFixed(0));
   }
 
+  averageAllUsersMinutesByDate(date) {
+    let matchingDates = this.allUsersActivityData.filter(userInfo => userInfo.date === date);
 
+    let totalMins = matchingDates.reduce((acc, userInfo) => {
+      acc += userInfo.minutesActive;
+      return acc;
+    }, 0);
+
+    return parseInt((totalMins / matchingDates.length).toFixed(0));
+  }
 
 };
 
