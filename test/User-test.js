@@ -20,7 +20,9 @@ import {
 } from './Sample-user-data';
 import {
   activitySampleData,
-  currentUserActivity
+  currentUserActivity,
+  userSampleWeeklyActivityData,
+  userSampleWeeklyActivityData2
 } from './Sample-activity-data';
 
 describe('User', () => {
@@ -115,6 +117,16 @@ describe('User', () => {
   it('should return the miles a user has walked based on their number of steps', () => {
     expect(currentUser.returnUserMilesWalked('2019/06/19')).to.be.equal(8.4);
     expect(currentUser.returnUserMilesWalked('2019/06/22')).to.be.equal(3.1);
+  });
+
+  it('should return how many minutes a user was active specified by date', () => {
+    expect(currentUser.returnMinutesActive('2019/06/20')).to.be.equal(74);
+    expect(currentUser.returnMinutesActive('2019/06/21')).to.be.equal(174);
+  });
+
+  it('should return average minutes active for a user for a given week', () => {
+    expect(currentUser.returnWeeklyAvgMinutesActive('2019/06/21')).to.be.equal(156.4);
+
   });
 
 })
