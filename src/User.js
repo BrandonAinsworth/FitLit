@@ -144,7 +144,7 @@ class User {
 
   returnStepsByDay(date) {
     let stepsTaken = this.activityData.find(elem => elem.date === date)
-    
+
     return stepsTaken.numSteps;
   }
 
@@ -163,8 +163,8 @@ class User {
       let daysMet = this.sortedActivityData.filter(daily => this.user.dailyStepGoal <= daily.numSteps);
       if(daysMet.length === 0){
         return 'Goal not met'
-      } 
-      return daysMet;     
+      }
+      return daysMet;
   }
 
   findAllTimeStairClimbingRecord() {
@@ -181,6 +181,19 @@ class User {
     return dailyStairs.flightsOfStairs;
   }
 
+  returnWeeklyStepCount(date) {
+    this.sortedActivityData = this.activityData.sort((a, b) => {
+      let dateA = new Date (a.date);
+      let dateB = new Date (b.date);
+      return dateB - dateA;
+    });
+
+    let index = this.sortedActivityData.findIndex((e) => e.date === date);
+
+    let output = this.sortedActivityData.slice(index, index + 7)
+
+    return output;
+  }
 
 }
 
