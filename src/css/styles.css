@@ -7,7 +7,7 @@ body, html {
   background-color: #41BC78;
   background-repeat: no-repeat;
   height: 100%;
-  overflow: hidden;
+  overflow: scroll;
   display: flex;
 }
 
