@@ -153,5 +153,13 @@ describe('User', () => {
     expect(currentUser.findAllTimeStairClimbingRecord()).to.be.equal(44);
   });
 
+  it('should return the number of steps for the latest day', () => {
+    expect(currentUser.returnStepsByDay("2019/06/22")).to.be.equal(3605);
+    expect(currentUser.returnStepsByDay("2019/06/18")).to.be.equal(4662);
+  });
 
+  it('should return the flights of stairs for a user for a specified day', () => {
+    expect(currentUser.returnStairsByDay("2019/06/16")).to.be.equal(37);
+    expect(currentUser.returnStairsByDay("2019/06/17")).to.be.equal(4);
+  });
 });

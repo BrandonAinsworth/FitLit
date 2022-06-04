@@ -173,9 +173,13 @@ class User {
     return this.activityData[0].flightsOfStairs;
   }
 
-
-
-
+  returnStairsByDay(date){
+    let dailyStairs = this.activityData.find(elem => elem.date === date)
+    if(dailyStairs === undefined){
+      return 'No data'
+    }
+    return dailyStairs.flightsOfStairs;
+  }
 
 
 }
