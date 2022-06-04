@@ -22,6 +22,7 @@ var weeklySleepData = document.querySelector(".weekly-sleep-data");
 var allTimeAverageHoursSlept = document.querySelector(".average-hours-slept");
 var allTimeAverageSleepQuality = document.querySelector(".average-sleep-quality");
 var catchError = document.querySelector(".catch-error");
+var totalDailySteps = document.querySelector(".total-num-steps");
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -32,6 +33,7 @@ var hydrationData;
 var hydrationRepo;
 var weeklyConsumption;
 var dailyConsumption;
+var activityData;
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
