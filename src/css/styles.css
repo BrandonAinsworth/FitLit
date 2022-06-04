@@ -7,8 +7,23 @@ body, html {
   background-color: #41BC78;
   background-repeat: no-repeat;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
   display: flex;
+}
+
+label , input {
+  font-size: 12px;
+}
+
+form {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  margin-top: 5px;
+  margin-left: 45px;
+  cursor: pointer;
 }
 
 .sidebar {
@@ -25,11 +40,11 @@ body, html {
 
 .greeting {
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .welcome-to-fitlit {
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .user-info {
@@ -38,10 +53,30 @@ body, html {
 }
 
 .user-full-name, .user-address, .user-email, .stride-length, .step-goal, .average-step-goal {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #dfe7ef;
-  padding: 8px;
+  padding: 2px;
+}
+.line{
+  border-color: #41BC78;
+}
+
+.how-you-doing {
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.update-header {
+  font-size: 14px;
+  font-weight: bolder;
+  text-align: center;
+  padding: 1.5px;
+}
+
+.hydration-input-wrapper, .activity-input-wrapper, .sleep-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .material-symbols-outlined {
@@ -55,7 +90,7 @@ body, html {
   display: flex;
   justify-content: space-evenly;
   margin: 5px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .hydration-widget, .hydration-canvas, .activity-widget, .activity-canvas, .daily-sleep-info, .weekly-sleep-info, .all-time-average-sleep-info {
@@ -63,7 +98,7 @@ body, html {
   flex-direction: column;
   background-color: #dfe7ef;
   box-shadow: 5px 5px 5px rgba(93, 90, 90, 0.794);
-  padding: 50px;
+  padding: 10px;
   border-radius: 5%;
 }
 
@@ -89,7 +124,7 @@ body, html {
   justify-content: space-around;
   width: max-content;
   margin: 5px;
-  margin-top: 45px;
+  margin-top: 5px;
 }
 
 .daily-sleep-info, .weekly-sleep-info, .all-time-average-sleep-info {

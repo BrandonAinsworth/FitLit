@@ -58,13 +58,13 @@ var activityRepo;
 
 
 
-/*
+
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
 }
 
 const id = getRandomID();
-*/
+
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
