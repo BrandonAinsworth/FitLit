@@ -11,6 +11,21 @@ body, html {
   display: flex;
 }
 
+label , input {
+  font-size: 12px;
+}
+
+form {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  margin-top: 5px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+
 .sidebar {
   box-shadow: 5px 5px 5px rgba(93, 90, 90, 0.794);
   background-color: #dfe7ef;
@@ -25,11 +40,11 @@ body, html {
 
 .greeting {
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .welcome-to-fitlit {
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .user-info {
@@ -38,10 +53,15 @@ body, html {
 }
 
 .user-full-name, .user-address, .user-email, .stride-length, .step-goal, .average-step-goal {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #dfe7ef;
-  padding: 8px;
+  padding: 5px;
+}
+
+
+.hydration-input-wrapper, .activity-input-wrapper, .sleep-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .material-symbols-outlined {
