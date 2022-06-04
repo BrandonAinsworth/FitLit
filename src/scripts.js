@@ -25,9 +25,12 @@ var catchError = document.querySelector(".catch-error");
 var totalDailySteps = document.querySelector(".total-num-steps");
 var dailyMinutesActive = document.querySelector(".daily-minutes-active");
 var dailyMiles = document.querySelector(".daily-distance-miles");
+var dailyFlights = document.querySelector(".daily-flights");
 var stepsCompared = document.querySelector(".steps-compared");
 var minutesCompared = document.querySelector(".minutes-compared");
 var flightsCompared = document.querySelector(".flights-compared");
+var weeklyActivityData = document.querySelector(".weekly-user-activity");
+
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
 var individual;
@@ -39,7 +42,7 @@ var weeklyConsumption;
 var dailyConsumption;
 var activityData;
 var activityRepo;
-var todaysDate;
+
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
@@ -104,11 +107,27 @@ function updateActivity(data) {
   let dailyStepCount = individual.returnStepsByDay(myDate);
   totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
   dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
+  dailyFlights.innerText = `Daily Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
   dailyMiles.innerText = `Daily Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
   stepsCompared.innerText = `Average Steps: ${activityRepo.averageAllUsersStepsByDate(myDate)}`;
   minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
   flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
+  weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
 }
+
+function gatherWeeklyActivityData(date) {
+  let index = individual.sortedActivityData.findIndex(e => e.date === date);
+  let dailyActivity = individual.sortedActivityData.slice(index, index + 7);
+
+  let output = '';
+
+  dailyActivity.forEach( activityDay => {
+    output += `Date: ${activityDay.date}: Steps: ${activityDay.numSteps} Flights: ${activityDay.flightsOfStairs} Minutes: ${activityDay.minutesActive} \n`;
+  });
+
+  return output;
+}
+
 
 function getUserInfo(id) {
     var currentUser = userRepo.returnSpecificUser(id);
