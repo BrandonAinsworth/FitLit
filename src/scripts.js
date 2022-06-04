@@ -30,6 +30,10 @@ var stepsCompared = document.querySelector(".steps-compared");
 var minutesCompared = document.querySelector(".minutes-compared");
 var flightsCompared = document.querySelector(".flights-compared");
 var weeklyActivityData = document.querySelector(".weekly-user-activity");
+var hydrationDate = document.getElementById("hydration-date");
+var hydrationOz = document.getElementById("hydration-oz");
+var hydrationButton = document.getElementById("hydration-button");
+
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -44,11 +48,23 @@ var activityData;
 var activityRepo;
 
 
+/*~~~~~~~~EVENT LISTENERS~~~~~~~*/
+
+
+
+
+/*~~~~~~~~CONTINUE HERE LOOK AT THIS~~~~~~~*/
+
+
+
+
+/*
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
 }
 
 const id = getRandomID();
+*/
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){

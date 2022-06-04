@@ -14,6 +14,17 @@ function checkForErrors(response) {
   }
 }
 
+export function postNewHydration(userDetails){
+  fetch('http://localhost:3001/api/v1/hydration' , {
+    method: 'POST',
+    body: JSON.stringify({id: userDetails.id, date: userDetails.date , numOunces: userDetails.ounces}),
+    headers: {'Content-Type': 'application/json'}
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log('Error'))
+}
+
 export {
   promise
 }
