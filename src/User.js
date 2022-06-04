@@ -142,6 +142,12 @@ class User {
     return parseFloat((total / output.length).toFixed(1));
   }
 
+  returnStepsByDay(date) {
+    let stepsTaken = this.activityData.find(elem => elem.date === date)
+    
+    return stepsTaken.numSteps;
+  }
+
   compareToStepGoal(date){
 
     let todaysSteps = this.activityData.find(elem => elem.date === date)
@@ -166,6 +172,12 @@ class User {
 
     return this.activityData[0].flightsOfStairs;
   }
+
+
+
+
+
+
 }
 
 
