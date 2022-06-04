@@ -22,6 +22,36 @@
           <div class="step-goal"></div>
           <div class="average-step-goal"></div>
         </div>
+        <hr class="line">
+        <h3>Tell us how you did!</h3>
+        <form class="hydration-input">
+          <label for="hydration-date">Date:</label><br>
+          <input type="text" id="hydration-date" placeholder="YYYY/MM/DD"/><br>
+          <label for="hydration-oz">Ounces Drank:</label><br>
+          <input type="text" id="hydration-oz" placeholder="Number of Ounces"/><br>
+          <button type="submit" id="hydration-button">Save</button>
+        </form>
+        <form class="activity-input">
+          <label for="activity-date">Date:</label><br>
+          <input type="text" id="activity-date" placeholder="YYYY/MM/DD"/><br>
+          <label for="activity-flights">Flights Climbed:</label><br>
+          <input type="text" id="activity-flights" placeholder="Number of Flights"/><br>
+          <label for="activity-minutes">Minutes Active:</label><br>
+          <input type="text" id="activity-minutes" placeholder="Number of Minutes"/><br>
+          <label for="activity-steps">Steps:</label><br>
+          <input type="text" id="activity-steps" placeholder="Number of Steps"/><br>
+          <button type="submit">Save</button>
+        </form>
+        <form class="sleep-input">
+          <label for="sleep-date">Date:</label><br>
+          <input type="text" id="sleep-date" placeholder="YYYY/MM/DD"/><br>
+          <label for="sleep-hours">Hours Slept:</label><br>
+          <input type="text" id="sleep-hours" placeholder="Number of Hours"/><br>
+          <label for="sleep-quality">Sleep Quality:</label><br>
+          <input type="text" id="sleep-quality" placeholder="Quality Rank Number"/><br>
+          <button type="submit">Save</button>
+        </form>
+        <hr class="line">
       </div>
     </section>
     <main>
@@ -45,7 +75,19 @@
           <span class="material-symbols-outlined" id="run_circle">run_circle</span>
           <div class="activity-widget-label">Activity</div>
           <div class="num-steps-wrapper">
-          <div class="total-num-steps">TEST</div>
+          <div class="total-num-steps"></div>
+          <div class="daily-minutes-active"></div> 
+          <div class="daily-flights"></div>
+          <div class="daily-distance-miles"></div> 
+          </div>
+        </section>
+        <section class="activity-widget">
+          <span class="material-symbols-outlined" id="run_circle">run_circle</span>
+          <div class="activity-widget-label">All User Activity</div>
+          <div class="user-versus-wrapper">
+          <div class="steps-compared"></div>
+          <div class="minutes-compared"></div> 
+          <div class="flights-compared"></div> 
           </div>
         </section>
         <section class="activity-canvas">
