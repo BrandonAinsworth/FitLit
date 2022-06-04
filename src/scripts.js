@@ -4,6 +4,7 @@ import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
+import Activity from './Activity';
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
 var userFirstName = document.querySelector(".greeting");
@@ -48,12 +49,12 @@ function getData(){
     renderGreeting();
     updateHydration(data[2]);
     updateSleep(data[1]);
-    
+
   })
   .catch(error => {
     console.log(error)
     catchError.innerText = 'We have encountered an error retrieving your data.'
-  }); 
+  });
 }
 
 getData()
