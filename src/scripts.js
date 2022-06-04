@@ -4,6 +4,7 @@ import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
 import Sleep from './Sleep';
+import Activity from './Activity';
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
 var userFirstName = document.querySelector(".greeting");
@@ -21,6 +22,7 @@ var weeklySleepData = document.querySelector(".weekly-sleep-data");
 var allTimeAverageHoursSlept = document.querySelector(".average-hours-slept");
 var allTimeAverageSleepQuality = document.querySelector(".average-sleep-quality");
 var catchError = document.querySelector(".catch-error");
+var totalDailySteps = document.querySelector(".total-num-steps");
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -31,6 +33,7 @@ var hydrationData;
 var hydrationRepo;
 var weeklyConsumption;
 var dailyConsumption;
+var activityData;
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
@@ -48,12 +51,12 @@ function getData(){
     renderGreeting();
     updateHydration(data[2]);
     updateSleep(data[1]);
-    
+
   })
   .catch(error => {
     console.log(error)
     catchError.innerText = 'We have encountered an error retrieving your data.'
-  }); 
+  });
 }
 
 getData()

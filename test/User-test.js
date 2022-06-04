@@ -3,29 +3,28 @@ import User from '../src/User';
 import Hydration from '../src/Hydration';
 import Sleep from '../src/Sleep';
 import Activity from '../src/Activity';
-import { 
-  hydrationSampleData, 
+import {
+  hydrationSampleData,
   userOutput
 } from './Sample-hydration-data';
-import { 
+import {
   sleepSampleData,
   currentUserSleep
  } from './Sample-sleep-data';
-import { 
-  userSampleData, 
+import {
+  userSampleData,
   userSampleWeeklySleepData,
-  userSampleWeeklySleep2, 
-  userSampleWeeklyHydration, 
+  userSampleWeeklySleep2,
+  userSampleWeeklyHydration,
   userSampleHydration,
   stepGoalSuccess,
-  stepGoalFailure
+  stepGoalFailure,
+  userSampleWeeklyActivityData,
+  userSampleWeeklyActivityData2
 } from './Sample-user-data';
 import {
   activitySampleData,
   currentUserActivity,
-  userSampleWeeklyActivityData,
-  userSampleWeeklyActivityData2,
-  
 } from './Sample-activity-data';
 
 describe('User', () => {
@@ -47,7 +46,7 @@ describe('User', () => {
 
     activity = new Activity(activitySampleData);
     currentUser.getActivityData(activity);
-    
+
   });
 
   it('should be a function', function () {
@@ -94,19 +93,19 @@ describe('User', () => {
   it('should calculate the average number of hours slept per day for all time', () => {
     expect(currentUser.averageHoursSleptAllTime()).to.be.equal(7.5);
   });
-  
+
   it('should calculate average sleep quality per day for all time', () => {
     expect(currentUser.averageSleepQualityAllTime()).to.be.equal(3.5);
   });
-  
+
   it('should return how many hours slept for a specific day', () => {
     expect(currentUser.returnDailyHoursSlept('2019/06/18')).to.be.equal(10.8);
   });
-  
+
   it('should return sleep quality for a specific day', () => {
     expect(currentUser.returnDailySleepQuality('2019/06/18')).to.be.equal(3.2);
   });
-  
+
   it('should return sleep data each day over the course of any given week', () => {
     expect(currentUser.returnWeeklySleepData('2019/06/22')).to.deep.equal(userSampleWeeklySleep2);
 
@@ -147,6 +146,25 @@ describe('User', () => {
   it('should notify the user they have never reached their goal', () => {
     currentUser.activityData = stepGoalFailure;
     expect(currentUser.returnAllDaysStepGoalExceeded()).to.be.equal("Goal not met");
+  });
+
+  it('should return the all time stair climbing record', () => {
+    expect(currentUser.findAllTimeStairClimbingRecord()).to.be.equal(44);
+  });
+
+  it('should return the number of steps for the latest day', () => {
+    expect(currentUser.returnStepsByDay("2019/06/22")).to.be.equal(3605);
+    expect(currentUser.returnStepsByDay("2019/06/18")).to.be.equal(4662);
+  });
+
+  it('should return the flights of stairs for a user for a specified day', () => {
+    expect(currentUser.returnStairsByDay("2019/06/16")).to.be.equal(37);
+    expect(currentUser.returnStairsByDay("2019/06/17")).to.be.equal(4);
+  });
+
+  it('should return activity data each day over the course of any given week', () => {
+    expect(currentUser.returnWeeklyStepCount('2019/06/21')).to.deep.equal(userSampleWeeklyActivityData);
+    expect(currentUser.returnWeeklyStepCount('2019/06/22')).to.deep.equal(userSampleWeeklyActivityData2);
   });
 
 });

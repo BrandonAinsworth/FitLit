@@ -142,6 +142,12 @@ class User {
     return parseFloat((total / output.length).toFixed(1));
   }
 
+  returnStepsByDay(date) {
+    let stepsTaken = this.activityData.find(elem => elem.date === date)
+
+    return stepsTaken.numSteps;
+  }
+
   compareToStepGoal(date){
 
     let todaysSteps = this.activityData.find(elem => elem.date === date)
@@ -157,9 +163,38 @@ class User {
       let daysMet = this.sortedActivityData.filter(daily => this.user.dailyStepGoal <= daily.numSteps);
       if(daysMet.length === 0){
         return 'Goal not met'
-      } 
-      return daysMet;     
+      }
+      return daysMet;
   }
+
+  findAllTimeStairClimbingRecord() {
+    this.activityData.sort((a,b) => b.flightsOfStairs - a.flightsOfStairs);
+
+    return this.activityData[0].flightsOfStairs;
+  }
+
+  returnStairsByDay(date){
+    let dailyStairs = this.activityData.find(elem => elem.date === date)
+    if(dailyStairs === undefined){
+      return 'No data'
+    }
+    return dailyStairs.flightsOfStairs;
+  }
+
+  returnWeeklyStepCount(date) {
+    this.sortedActivityData = this.activityData.sort((a, b) => {
+      let dateA = new Date (a.date);
+      let dateB = new Date (b.date);
+      return dateB - dateA;
+    });
+
+    let index = this.sortedActivityData.findIndex((e) => e.date === date);
+
+    let output = this.sortedActivityData.slice(index, index + 7)
+
+    return output;
+  }
+
 }
 
 

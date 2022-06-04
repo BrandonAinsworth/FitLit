@@ -51,14 +51,14 @@ body, html {
   margin-bottom: 20px;
 }
 
-.hydration-wrapper {
+.hydration-wrapper, .activity-wrapper {
   display: flex;
   justify-content: space-evenly;
   margin: 5px;
-  margin-top: 75px;
+  margin-top: 25px;
 }
 
-.hydration-widget, .hydration-canvas, .daily-sleep-info, .weekly-sleep-info, .all-time-average-sleep-info {
+.hydration-widget, .hydration-canvas, .activity-widget, .activity-canvas, .daily-sleep-info, .weekly-sleep-info, .all-time-average-sleep-info {
   display: flex;
   flex-direction: column;
   background-color: #dfe7ef;
@@ -89,7 +89,7 @@ body, html {
   justify-content: space-around;
   width: max-content;
   margin: 5px;
-  margin-top: 75px;
+  margin-top: 45px;
 }
 
 .daily-sleep-info, .weekly-sleep-info, .all-time-average-sleep-info {
