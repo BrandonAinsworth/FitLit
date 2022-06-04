@@ -128,6 +128,7 @@ class User {
       return dateB - dateA;
     });
   }
+
   returnWeeklyAvgMinutesActive(date){
     this.sortActivityData()
 

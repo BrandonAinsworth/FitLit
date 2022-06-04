@@ -34,13 +34,20 @@ var hydrationRepo;
 var weeklyConsumption;
 var dailyConsumption;
 var activityData;
+var activityRepo;
+var todaysDate;
 
 const getRandomID = () => {
   return Math.floor(Math.random() * 50);
 }
 
+const getLatestDate = () => {
+
+}
+
 const id = getRandomID();
 
+/*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
   promise.then(data => {
 
@@ -51,7 +58,7 @@ function getData(){
     renderGreeting();
     updateHydration(data[2]);
     updateSleep(data[1]);
-
+    updateActivity(data[3])
   })
   .catch(error => {
     console.log(error)
@@ -85,11 +92,20 @@ function updateSleep(data) {
   });
   allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
   allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
+}
+
+//
+function updateActivity(data) {
+  activityData = data;
+  activityRepo = new Activity(activityData);
+  individual.getActivityData(activityRepo);
+  let latestWeekActivityData = individual.sortActivityData();
+  let myDate = latestWeekActivityData[0].date;
+  let dailyStepCount = individual.returnStepsByDay(myDate);
+  totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`
 
 }
 
-
-/*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getUserInfo(id) {
     var currentUser = userRepo.returnSpecificUser(id);
     userFullName.innerText = `Name: ${currentUser[0].name}`;
