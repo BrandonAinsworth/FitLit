@@ -43,6 +43,10 @@ export function postNewActivity(userDetails){
     .catch(error => console.log('Error'))
 }
 
+
+
+
+
 export {
   promise
 }

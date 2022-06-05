@@ -206,27 +206,28 @@ function saveNewHydrationInfo(event) {
   event.preventDefault();
 
   //check data & data validation.
-
-
-  // look at date to ensure it doesn't already exist in the data.
   // confirm date is not a future date.
-  //
   let newDate = hydrationDate.value.split('-');
   newDate = newDate.join('/');
 
-  // post information to local server.
+  // look at date to ensure it doesn't already exist in the data.
+  // if (individual.hydrationData.includes(newDate)) {
+  //   console.log("Error: Date already exists");
+  //   window.alert("Error: Date already exists");
+  // } else {
+  // // post information to local server.
   postNewHydration({userID: individual.user.id, date: newDate, numOunces: hydrationOz.value})
   .then(data => {
 
     individual.hydrationData.unshift(data);
+    // refresh data showing on page
     weeklyConsumption = individual.returnWeeklyOuncesConsumed();
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
     renderWeeklyWaterConsumption(weeklyConsumption);
     totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
-    // message to user?
-  })
-  // refresh data showing on page
-
+    // success message to user?
+    })
+  // }
 }
 
 function saveNewActivity(event) {
@@ -235,24 +236,30 @@ function saveNewActivity(event) {
   let newDate = activityDate.value.split('-');
   newDate = newDate.join('/');
 
-  postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs:activityFlights.value, minutesActive: activityMinutes.value, numSteps: activitySteps.value})
-  .then(data => {
-    activityRepo.allUsersActivityData.unshift(data);
-    console.log(activityRepo);
-    individual.activityData.unshift(data);
-    let latestWeekActivityData = individual.sortActivityData();
-    let myDate = latestWeekActivityData[0].date;
-    let dailyStepCount = individual.returnStepsByDay(myDate);
-    totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
-    dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
-    dailyFlights.innerText = `Daily Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
-    dailyMiles.innerText = `Daily Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
-    stepsCompared.innerText = `Average Steps: ${activityRepo.averageAllUsersStepsByDate(myDate)}`;
-    minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
-    flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
-    weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
-    // message to user?
-  })
-  // refresh data showing on page
 
+  // look at date to ensure it doesn't already exist in the data.
+  // ?? if (individual.activityData.includes(newDate)) {
+  //   console.log("Error: Date already exists");
+  //   window.alert("Error: Date already exists");
+  // } else {
+    postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs:activityFlights.value, minutesActive: activityMinutes.value, numSteps: activitySteps.value})
+    .then(data => {
+      activityRepo.allUsersActivityData.unshift(data);
+      console.log(activityRepo);
+      individual.activityData.unshift(data);
+      let latestWeekActivityData = individual.sortActivityData();
+      let myDate = latestWeekActivityData[0].date;
+      let dailyStepCount = individual.returnStepsByDay(myDate);
+        // refresh data showing on page
+      totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
+      dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
+      dailyFlights.innerText = `Daily Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
+      dailyMiles.innerText = `Daily Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
+      stepsCompared.innerText = `Average Steps: ${activityRepo.averageAllUsersStepsByDate(myDate)}`;
+      minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
+      flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
+      weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
+      // success message to user?
+    })
+  // }
 }
