@@ -43,6 +43,21 @@ export function postNewActivity(userDetails){
     .catch(error => console.log('Error'))
 }
 
+export function postNewSleep(userDetails){
+  return fetch('http://localhost:3001/api/v1/sleep' , {
+    method: 'POST',
+    body: JSON.stringify({
+      userID: userDetails.userID,
+      date: userDetails.date,
+      hoursSlept: userDetails.hoursSlept,
+      sleepQuality: userDetails.quality,
+    }),
+    headers: {'Content-Type': 'application/json'}
+  })
+    .then(response => response.json())
+
+    .catch(error => console.log('Error'))
+}
 
 
 

@@ -1,5 +1,6 @@
 import './css/styles.css';
-import { postNewHydration, postNewActivity, promise } from './apiCalls'
+import { postNewHydration, postNewActivity, 
+  postNewSleep, promise } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
@@ -38,6 +39,12 @@ var activityFlights = document.getElementById("activity-flights");
 var activityMinutes = document.getElementById("activity-minutes");
 var activitySteps = document.getElementById("activity-steps");
 var activityButton = document.getElementById("activity-button");
+var sleepDate = document.getElementById("sleep-date");
+var sleepHours = document.getElementById("sleep-hours");
+var sleepQuality = document.getElementById("sleep-quality");
+var sleepButton = document.getElementById("sleep-button");
+
+
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -61,6 +68,10 @@ activityFlights.addEventListener('keydown', checkFieldsActivity);
 activityMinutes.addEventListener('keydown', checkFieldsActivity);
 activitySteps.addEventListener('keydown', checkFieldsActivity);
 activityButton.addEventListener("click", saveNewActivity);
+sleepDate.addEventListener('keydown', checkFieldsSleep);
+sleepHours.addEventListener('keydown', checkFieldsSleep);
+sleepQuality.addEventListener('keydown', checkFieldsSleep);
+sleepButton.addEventListener('click', saveNewSleep);
 
 // const getRandomID = () => {
 //   return Math.floor(Math.random() * 50);
@@ -200,7 +211,15 @@ function checkFieldsActivity() {
   }
 }
 
-
+function checkFieldsSleep() {
+  if (sleepDate.value !== "" && sleepHours.value !== "" && sleepQuality.value !== "" ) {
+    sleepButton.classList.remove('disable');
+    sleepButton.disabled = false;
+  } else {
+    sleepButton.classList.add('disable');
+    sleepButton.disabled = true;
+  }
+}
 
 function saveNewHydrationInfo(event) {
   event.preventDefault();
@@ -259,6 +278,54 @@ function saveNewActivity(event) {
       minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
       flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
       weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
+      // success message to user?
+    })
+  // }
+}
+
+function saveNewSleep(event) {
+  event.preventDefault();
+
+  let newDate = sleepDate.value.split('-');
+  newDate = newDate.join('/');
+
+
+  // look at date to ensure it doesn't already exist in the data.
+  // ?? if (individual.activityData.includes(newDate)) {
+  //   console.log("Error: Date already exists");
+  //   window.alert("Error: Date already exists");
+  // } else {
+
+    let hours = parseFloat(sleepHours.value);
+    let qual = parseFloat(sleepQuality.value);
+
+    console.log(hours, "<<< hours");
+    console.log(qual, "<<< QUAL");
+
+    postNewSleep({userID: individual.user.id, date: newDate, hoursSlept: hours, quality: qual})
+    .then(data => {
+      // sleepRepo.allUsersSleepData.unshift(data);
+      console.log(data);
+
+      individual.sortedSleepData.unshift(data);
+
+      // refresh data showing on page
+      let latestWeekSleepData = individual.returnLatestWeekSleepData();
+      console.log(latestWeekSleepData);
+      let myDate = latestWeekSleepData[0].date;
+      dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
+      dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
+      // individual.returnWeeklySleepData(myDate).forEach(data => {
+      //     weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
+      // });
+      weeklySleepData.innerText = "Weekly Sleep Data:\n";
+      latestWeekSleepData.forEach(data => {
+        weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
+      })
+  
+      allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
+      console.log(individual.averageSleepQualityAllTime());
+      allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
       // success message to user?
     })
   // }
