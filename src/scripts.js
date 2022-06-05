@@ -234,6 +234,9 @@ function saveNewHydrationInfo(event) {
   //   console.log("Error: Date already exists");
   //   window.alert("Error: Date already exists");
   // } else {
+  
+  // TO DO: parse hydrationOz to a number before submitting POST.
+  
   // // post information to local server.
   postNewHydration({userID: individual.user.id, date: newDate, numOunces: hydrationOz.value})
   .then(data => {
@@ -244,6 +247,12 @@ function saveNewHydrationInfo(event) {
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
     renderWeeklyWaterConsumption(weeklyConsumption);
     totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
+
+    // clear input form
+    hydrationOz.value = "";
+    hydrationDate.value = "";
+    checkFieldsHydration();
+
     // success message to user?
     })
   // }
@@ -261,10 +270,14 @@ function saveNewActivity(event) {
   //   console.log("Error: Date already exists");
   //   window.alert("Error: Date already exists");
   // } else {
+
+    // TO DO: parse activity values to be numbers instead of strings.
+
     postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs:activityFlights.value, minutesActive: activityMinutes.value, numSteps: activitySteps.value})
     .then(data => {
       activityRepo.allUsersActivityData.unshift(data);
       individual.activityData.unshift(data);
+
       let latestWeekActivityData = individual.sortActivityData();
       let myDate = latestWeekActivityData[0].date;
       let dailyStepCount = individual.returnStepsByDay(myDate);
@@ -277,6 +290,14 @@ function saveNewActivity(event) {
       minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
       flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
       weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
+
+      // clear input form.
+      activityFlights.value = "";
+      activityMinutes.value = "";
+      activitySteps.value = ""
+      activityDate.value = "";
+      checkFieldsActivity();
+      
       // success message to user?
     })
   // }
@@ -301,8 +322,8 @@ function saveNewSleep(event) {
     postNewSleep({userID: individual.user.id, date: newDate, hoursSlept: hours, quality: qual})
     .then(data => {
       // sleepRepo.allUsersSleepData.unshift(data);
-
       individual.sortedSleepData.unshift(data);
+
 
       // refresh data showing on page
       let latestWeekSleepData = individual.returnLatestWeekSleepData();
@@ -320,7 +341,15 @@ function saveNewSleep(event) {
       allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
       console.log(individual.averageSleepQualityAllTime());
       allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
+
+      // clear input form.
+      sleepHours.value = "";
+      sleepQuality.value = "";
+      sleepDate.value = "";
+      checkFieldsSleep();
+      
       // success message to user?
+
     })
   // }
 }
