@@ -76,7 +76,6 @@ describe('User Repository Test', () => {
   
   it('should average daily step goals amongst all users', () => {
     let averageStepGoal = userRepository.averageStepGoalAllUsers();
-
     expect(averageStepGoal).to.equal(6667);
   });
 })

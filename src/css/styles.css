@@ -64,13 +64,13 @@ button {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/* .user-address, .user-email,  */
+
 .user-full-name, .stride-length, .step-goal, .average-step-goal {
   background-color:  #F7F7F7;
   padding: 2px;
 }
 
-.line{
+.line {
   border-color: #41BC78;
 }
 

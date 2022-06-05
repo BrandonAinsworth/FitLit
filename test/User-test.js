@@ -108,7 +108,6 @@ describe('User', () => {
 
   it('should return sleep data each day over the course of any given week', () => {
     expect(currentUser.returnWeeklySleepData('2019/06/22')).to.deep.equal(userSampleWeeklySleep2);
-
     expect(currentUser.returnWeeklySleepData('2019/06/21')).to.deep.equal(userSampleWeeklySleepData);
   });
 
@@ -127,7 +126,7 @@ describe('User', () => {
   });
 
   it('should return an array of sorted activity data', () => {
-  expect(currentUser.sortActivityData()).to.deep.equal(currentUserActivity.reverse())
+    expect(currentUser.sortActivityData()).to.deep.equal(currentUserActivity.reverse());
   });
 
   it('should return average minutes active for a user for a given week', () => {
@@ -166,5 +165,4 @@ describe('User', () => {
     expect(currentUser.returnWeeklyStepCount('2019/06/21')).to.deep.equal(userSampleWeeklyActivityData);
     expect(currentUser.returnWeeklyStepCount('2019/06/22')).to.deep.equal(userSampleWeeklyActivityData2);
   });
-
 });

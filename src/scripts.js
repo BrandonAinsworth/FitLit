@@ -9,9 +9,6 @@ import Activity from './Activity';
 
 /*~~~~~~~~QUERY SELECTORS~~~~~~~*/
 var userFirstName = document.querySelector(".greeting");
-var userFullName = document.querySelector(".user-full-name");
-var userAddress = document.querySelector(".user-address");
-var userEmail = document.querySelector(".user-email");
 var userStepGoal = document.querySelector(".step-goal");
 var userStrideLength = document.querySelector(".stride-length");
 var averageStepGoal = document.querySelector(".average-step-goal");
@@ -44,8 +41,6 @@ var sleepHours = document.getElementById("sleep-hours");
 var sleepQuality = document.getElementById("sleep-quality");
 var sleepButton = document.getElementById("sleep-button");
 
-
-
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
 var individual;
@@ -57,7 +52,6 @@ var weeklyConsumption;
 var dailyConsumption;
 var activityData;
 var activityRepo;
-
 
 /*~~~~~~~~EVENT LISTENERS~~~~~~~*/
 hydrationButton.addEventListener('click', saveNewHydrationInfo);
@@ -78,7 +72,6 @@ const getRandomID = () => {
 }
 
 const id = getRandomID();
-// const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -127,7 +120,6 @@ function updateSleep(data) {
   allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
 }
 
-//
 function updateActivity(data) {
   activityData = data;
   activityRepo = new Activity(activityData);
@@ -158,12 +150,8 @@ function gatherWeeklyActivityData(date) {
   return output;
 }
 
-
 function getUserInfo(id) {
     var currentUser = userRepo.returnSpecificUser(id);
-    // userFullName.innerText = `Name: ${currentUser[0].name}`;
-    // userAddress.innerText = `Address: ${currentUser[0].address}`;
-    // userEmail.innerText = `Email: ${currentUser[0].email}`;
     userStrideLength.innerText = `Stride Length: ${currentUser[0].strideLength}ft`;
     userStepGoal.innerText = `Your Step Goal: ${currentUser[0].dailyStepGoal}`;
     return currentUser;
@@ -190,7 +178,6 @@ function renderWeeklyWaterConsumption(weeklyConsumption) {
 function checkFieldsHydration() {
   // function to check when all required fields of form are filled in.
   // Then enable save button.
-
   if (hydrationDate.value !== `` && hydrationOz.value !== '') {
     hydrationButton.classList.remove('disable');
     hydrationButton.disabled = false;
@@ -223,37 +210,28 @@ function checkFieldsSleep() {
 
 function saveNewHydrationInfo(event) {
   event.preventDefault();
-
   //check data & data validation.
   // confirm date is not a future date.
   let newDate = hydrationDate.value.split('-');
   newDate = newDate.join('/');
-
   // look at date to ensure it doesn't already exist in the data.
   // if (individual.hydrationData.includes(newDate)) {
   //   console.log("Error: Date already exists");
   //   window.alert("Error: Date already exists");
   // } else {
-
   let ounces = parseInt(hydrationOz.value);
-
-  // // post information to local server.
   postNewHydration({userID: individual.user.id, date: newDate, numOunces: ounces})
   .then(data => {
 
     individual.hydrationData.unshift(data);
-    // refresh data showing on page
     weeklyConsumption = individual.returnWeeklyOuncesConsumed();
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
     renderWeeklyWaterConsumption(weeklyConsumption);
     totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
 
-    // clear input form
     hydrationOz.value = "";
     hydrationDate.value = "";
     checkFieldsHydration();
-
-    // success message to user?
     })
   // }
 }
@@ -263,14 +241,11 @@ function saveNewActivity(event) {
 
   let newDate = activityDate.value.split('-');
   newDate = newDate.join('/');
-
-
   // look at date to ensure it doesn't already exist in the data.
   // ?? if (individual.activityData.includes(newDate)) {
   //   console.log("Error: Date already exists");
   //   window.alert("Error: Date already exists");
   // } else {
-
     let flights = parseInt(activityFlights.value);
     let minutes = parseInt(activityMinutes.value);
     let steps = parseInt(activitySteps.value);
@@ -283,7 +258,6 @@ function saveNewActivity(event) {
       let latestWeekActivityData = individual.sortActivityData();
       let myDate = latestWeekActivityData[0].date;
       let dailyStepCount = individual.returnStepsByDay(myDate);
-        // refresh data showing on page
       totalDailySteps.innerText = `Step Count: ${dailyStepCount}`;
       dailyMinutesActive.innerText = `Minutes Active: ${individual.returnMinutesActive(myDate)}`;
       dailyFlights.innerText = `Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
@@ -293,14 +267,11 @@ function saveNewActivity(event) {
       flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
       weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
 
-      // clear input form.
       activityFlights.value = "";
       activityMinutes.value = "";
       activitySteps.value = ""
       activityDate.value = "";
       checkFieldsActivity();
-
-      // success message to user?
     })
   // }
 }
@@ -310,47 +281,33 @@ function saveNewSleep(event) {
 
   let newDate = sleepDate.value.split('-');
   newDate = newDate.join('/');
-
-
   // look at date to ensure it doesn't already exist in the data.
   // ?? if (individual.activityData.includes(newDate)) {
   //   console.log("Error: Date already exists");
   //   window.alert("Error: Date already exists");
   // } else {
-
     let hours = parseFloat(sleepHours.value);
     let qual = parseFloat(sleepQuality.value);
 
     postNewSleep({userID: individual.user.id, date: newDate, hoursSlept: hours, quality: qual})
     .then(data => {
-      // sleepRepo.allUsersSleepData.unshift(data);
       individual.sortedSleepData.unshift(data);
 
-
-      // refresh data showing on page
       let latestWeekSleepData = individual.returnLatestWeekSleepData();
       let myDate = latestWeekSleepData[0].date;
       dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
       dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
-      // individual.returnWeeklySleepData(myDate).forEach(data => {
-      //     weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
-      // });
       weeklySleepData.innerText = "Weekly Sleep Data:\n";
       latestWeekSleepData.forEach(data => {
         weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
       })
-
       allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
       allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
 
-      // clear input form.
       sleepHours.value = "";
       sleepQuality.value = "";
       sleepDate.value = "";
       checkFieldsSleep();
-
-      // success message to user?
-
     })
   // }
 }
