@@ -73,12 +73,12 @@ sleepHours.addEventListener('keydown', checkFieldsSleep);
 sleepQuality.addEventListener('keydown', checkFieldsSleep);
 sleepButton.addEventListener('click', saveNewSleep);
 
-const getRandomID = () => {
-  return Math.floor(Math.random() * 50);
-}
-
-const id = getRandomID();
-// const id = 2; //This should be Jarvis.
+// const getRandomID = () => {
+//   return Math.floor(Math.random() * 50);
+// }
+//
+// const id = getRandomID();
+const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -131,11 +131,9 @@ function updateSleep(data) {
 function updateActivity(data) {
   activityData = data;
   activityRepo = new Activity(activityData);
-  console.log(activityRepo);
   individual.getActivityData(activityRepo);
   let latestWeekActivityData = individual.sortActivityData();
   let myDate = latestWeekActivityData[0].date;
-  console.log(myDate);
   let dailyStepCount = individual.returnStepsByDay(myDate);
   totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
   dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
@@ -237,10 +235,10 @@ function saveNewHydrationInfo(event) {
   //   window.alert("Error: Date already exists");
   // } else {
 
-  // TO DO: parse hydrationOz to a number before submitting POST.
+  let ounces = parseInt(hydrationOz.value);
 
   // // post information to local server.
-  postNewHydration({userID: individual.user.id, date: newDate, numOunces: hydrationOz.value})
+  postNewHydration({userID: individual.user.id, date: newDate, numOunces: ounces})
   .then(data => {
 
     individual.hydrationData.unshift(data);
@@ -343,7 +341,6 @@ function saveNewSleep(event) {
       })
 
       allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
-      console.log(individual.averageSleepQualityAllTime());
       allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
 
       // clear input form.
