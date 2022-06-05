@@ -1,5 +1,5 @@
 * {
-  font-family: 'Xanh Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
 }
 
@@ -7,7 +7,7 @@ body, html {
   background-color: #41BC78;
   background-repeat: no-repeat;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
 }
 
