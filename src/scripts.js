@@ -53,16 +53,16 @@ hydrationButton.addEventListener('click', saveNewHydrationInfo);
 hydrationDate.addEventListener('keyup', checkFields);
 hydrationOz.addEventListener('keydown', checkFields);
 
-/*~~~~~~~~CONTINUE HERE LOOK AT THIS~~~~~~~*/
 
 
 
-// const getRandomID = () => {
-//   return Math.floor(Math.random() * 50);
-// }
 
-// const id = getRandomID();
-const id = 2; //This should be Jarvis.
+const getRandomID = () => {
+  return Math.floor(Math.random() * 50);
+}
+
+const id = getRandomID();
+// const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -212,3 +212,6 @@ function saveNewHydrationInfo(event) {
   // refresh data showing on page
 
 }
+
+
+/*~~~~~~~~CONTINUE HERE LOOK AT THIS~~~~~~~*/
