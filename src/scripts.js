@@ -73,12 +73,12 @@ sleepHours.addEventListener('keydown', checkFieldsSleep);
 sleepQuality.addEventListener('keydown', checkFieldsSleep);
 sleepButton.addEventListener('click', saveNewSleep);
 
-// const getRandomID = () => {
-//   return Math.floor(Math.random() * 50);
-// }
-//
-// const id = getRandomID();
-const id = 2; //This should be Jarvis.
+const getRandomID = () => {
+  return Math.floor(Math.random() * 50);
+}
+
+const id = getRandomID();
+// const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -264,7 +264,6 @@ function saveNewActivity(event) {
     postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs:activityFlights.value, minutesActive: activityMinutes.value, numSteps: activitySteps.value})
     .then(data => {
       activityRepo.allUsersActivityData.unshift(data);
-      console.log(activityRepo);
       individual.activityData.unshift(data);
       let latestWeekActivityData = individual.sortActivityData();
       let myDate = latestWeekActivityData[0].date;
@@ -299,19 +298,14 @@ function saveNewSleep(event) {
     let hours = parseFloat(sleepHours.value);
     let qual = parseFloat(sleepQuality.value);
 
-    console.log(hours, "<<< hours");
-    console.log(qual, "<<< QUAL");
-
     postNewSleep({userID: individual.user.id, date: newDate, hoursSlept: hours, quality: qual})
     .then(data => {
       // sleepRepo.allUsersSleepData.unshift(data);
-      console.log(data);
 
       individual.sortedSleepData.unshift(data);
 
       // refresh data showing on page
       let latestWeekSleepData = individual.returnLatestWeekSleepData();
-      console.log(latestWeekSleepData);
       let myDate = latestWeekSleepData[0].date;
       dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
       dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
