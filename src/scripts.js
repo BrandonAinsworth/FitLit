@@ -1,5 +1,5 @@
 import './css/styles.css';
-import { promise } from './apiCalls'
+import { postNewHydration, promise } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
@@ -49,11 +49,9 @@ var activityRepo;
 
 
 /*~~~~~~~~EVENT LISTENERS~~~~~~~*/
-
-
-
-
-/*~~~~~~~~CONTINUE HERE LOOK AT THIS~~~~~~~*/
+hydrationButton.addEventListener('click', saveNewHydrationInfo);
+hydrationDate.addEventListener('keyup', checkFields);
+hydrationOz.addEventListener('keydown', checkFields);
 
 
 
@@ -64,7 +62,7 @@ const getRandomID = () => {
 }
 
 const id = getRandomID();
-
+// const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -171,3 +169,49 @@ function renderWeeklyWaterConsumption(weeklyConsumption) {
 
   weeklyWaterConsumption.innerText = chartOutput;
 }
+
+
+function checkFields() {
+  // function to check when all required fields of form are filled in.
+  // Then enable save button.
+
+  if (hydrationDate.value !== `` && hydrationOz.value !== '') {
+    hydrationButton.classList.remove('disable');
+    hydrationButton.disabled = false;
+  } else {
+    hydrationButton.classList.add('disable');
+    hydrationButton.disabled = true;
+  }
+}
+
+
+
+function saveNewHydrationInfo(event) {
+  event.preventDefault();
+
+  //check data & data validation.
+  
+
+  // look at date to ensure it doesn't already exist in the data.
+  // confirm date is not a future date.
+  // 
+  let newDate = hydrationDate.value.split('-');
+  newDate = newDate.join('/');
+
+  // post information to local server.
+  postNewHydration({userID: individual.user.id, date: newDate, numOunces: hydrationOz.value})
+  .then(data => {
+    
+    individual.hydrationData.unshift(data);
+    weeklyConsumption = individual.returnWeeklyOuncesConsumed();
+    dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
+    renderWeeklyWaterConsumption(weeklyConsumption);
+    totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;  
+    // message to user?
+  })
+  // refresh data showing on page
+
+}
+
+
+/*~~~~~~~~CONTINUE HERE LOOK AT THIS~~~~~~~*/

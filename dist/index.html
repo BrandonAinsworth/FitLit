@@ -29,10 +29,10 @@
           <div class="update-header">Hydration</div>
           <form class="hydration-input">
             <label for="hydration-date">Date:</label><br>
-            <input type="text" id="hydration-date" placeholder="YYYY/MM/DD"/><br>
+            <input type="date" requiredPattern="\d{4}/\d{2}/\d{2}" id="hydration-date" placeholder="YYYY/MM/DD" required/><br>
             <label for="hydration-oz">Ounces Drank:</label><br>
-            <input type="text" id="hydration-oz" placeholder="Number of Ounces"/><br>
-            <button type="submit" id="hydration-button">Save</button>
+            <input type="number" id="hydration-oz" placeholder="Number of Ounces" required/><br>
+            <button type="submit" id="hydration-button" class="disable" disabled >Save</button>
           </form>
         </div>
           <hr class="line">
@@ -40,14 +40,14 @@
           <form class="activity-input">
             <div class="update-header">Activity</div>
             <label for="activity-date">Date:</label><br>
-            <input type="text" id="activity-date" placeholder="YYYY/MM/DD"/><br>
+            <input type="date" id="activity-date" placeholder="YYYY/MM/DD" required /><br>
             <label for="activity-flights">Flights Climbed:</label><br>
-            <input type="text" id="activity-flights" placeholder="Number of Flights"/><br>
+            <input type="number" id="activity-flights" placeholder="Number of Flights" required /><br>
             <label for="activity-minutes">Minutes Active:</label><br>
-            <input type="text" id="activity-minutes" placeholder="Number of Minutes"/><br>
+            <input type="number" id="activity-minutes" placeholder="Number of Minutes" required /><br>
             <label for="activity-steps">Steps:</label><br>
-            <input type="text" id="activity-steps" placeholder="Number of Steps"/><br>
-            <button type="submit">Save</button>
+            <input type="number" id="activity-steps" placeholder="Number of Steps" required /><br>
+            <button type="submit" disabled >Save</button>
           </form>
         </div>    
           <hr class="line">
@@ -55,12 +55,12 @@
           <form class="sleep-input">
             <div class="update-header">Sleep</div>
             <label for="sleep-date">Date:</label><br>
-            <input type="text" id="sleep-date" placeholder="YYYY/MM/DD"/><br>
+            <input type="date" id="sleep-date" placeholder="YYYY/MM/DD" required /><br>
             <label for="sleep-hours">Hours Slept:</label><br>
-            <input type="text" id="sleep-hours" placeholder="Number of Hours"/><br>
+            <input type="number" id="sleep-hours" placeholder="Number of Hours" required /><br>
             <label for="sleep-quality">Sleep Quality:</label><br>
-            <input type="text" id="sleep-quality" placeholder="Quality Rank Number"/><br>
-            <button type="submit">Save</button>
+            <input type="number" id="sleep-quality" placeholder="Quality Rank Number" required /><br>
+            <button type="submit" disabled >Save</button>
           </form>
         </div>   
         <hr class="line">
