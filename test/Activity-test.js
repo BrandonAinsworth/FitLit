@@ -33,26 +33,17 @@ describe ('Activity', () => {
   });
 
   it('should calculate the average stairs climbed for a specific date for all users', () => {
-
     expect(activity.averageAllUsersStairsByDate('2019/06/16')).to.be.equal(27);
     expect(activity.averageAllUsersStairsByDate('2019/06/20')).to.be.equal(23);
-
   });
 
   it('should calculate the average steps for a specific date for all users', () => {
-
     expect(activity.averageAllUsersStepsByDate('2019/06/15')).to.be.equal(5091);
     expect(activity.averageAllUsersStepsByDate('2019/06/21')).to.be.equal(8161);
-
   });
 
   it('should calculate the average number of minutes active for a specific date for all users', () => {
-
     expect(activity.averageAllUsersMinutesByDate('2019/06/15')).to.be.equal(131);
     expect(activity.averageAllUsersMinutesByDate('2019/06/22')).to.be.equal(99);
-
   });
-
-
-
 })

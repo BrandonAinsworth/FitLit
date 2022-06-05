@@ -4,12 +4,10 @@ import {
   hydrationSampleData, 
   userOutput
 } from './Sample-hydration-data';
-// const { hydrationSampleData } = require('./Sample-data');
 
 describe('Hydration', () => {
 
   let hydration;
-  // let hydrationData;
 
   beforeEach(() => {
  
@@ -30,14 +28,6 @@ describe('Hydration', () => {
   });
 
   it('should return an array of a single user\'s data', () => {
-  
     expect(hydration.returnSpecificUser(2)).to.deep.equal(userOutput);
   });
-
-
-  // What if there is a new user with empty data arrays?
-
-  // What if the user has less than 7 days of data available?
-
-
 })

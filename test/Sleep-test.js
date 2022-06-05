@@ -8,7 +8,6 @@ import {
 describe('Sleep Test', () => {
 
   let sleep;
-  let sleepData;
 
   beforeEach(() => {
 

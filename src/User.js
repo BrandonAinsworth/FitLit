@@ -69,7 +69,7 @@ class User {
   }
 
   returnDailyHoursSlept(date) {
-    let dailyHours = this.sleepData.find(dailyHrs => dailyHrs.date === date)
+    let dailyHours = this.sleepData.find(dailyHrs => dailyHrs.date === date);
     if (dailyHours === undefined) {
       return 0;
     }
@@ -77,7 +77,7 @@ class User {
   }
 
   returnDailySleepQuality(date) {
-    let dailyQuality = this.sleepData.find(dailyQuality => dailyQuality.date === date)
+    let dailyQuality = this.sleepData.find(dailyQuality => dailyQuality.date === date);
     return dailyQuality.sleepQuality;
   }
 
@@ -90,7 +90,7 @@ class User {
 
     let index = this.sortedSleepData.findIndex((e) => e.date === date);
 
-    let output = this.sortedSleepData.slice(index, index + 7)
+    let output = this.sortedSleepData.slice(index, index + 7);
 
     return output;
   }
@@ -106,7 +106,7 @@ class User {
   }
 
   returnUserMilesWalked(date){
-    let dailySteps = this.activityData.find(elem => elem.date === date)
+    let dailySteps = this.activityData.find(elem => elem.date === date);
     if(dailySteps === undefined){
       return 'No data'
     }
@@ -114,7 +114,7 @@ class User {
   }
 
   returnMinutesActive(date){
-    let dailyMinutes = this.activityData.find(elem => elem.date === date)
+    let dailyMinutes = this.activityData.find(elem => elem.date === date);
     if(dailyMinutes === undefined){
       return 'No data'
     }
@@ -134,7 +134,7 @@ class User {
 
     let index = this.sortedActivityData.findIndex((e) => e.date === date);
 
-    let output = this.sortedActivityData.slice(index, index + 7)
+    let output = this.sortedActivityData.slice(index, index + 7);
 
     let total = output.reduce((acc, elem) => {
       acc += elem.minutesActive
@@ -144,26 +144,26 @@ class User {
   }
 
   returnStepsByDay(date) {
-    let stepsTaken = this.activityData.find(elem => elem.date === date)
+    let stepsTaken = this.activityData.find(elem => elem.date === date);
 
     return stepsTaken.numSteps;
   }
 
   compareToStepGoal(date){
 
-    let todaysSteps = this.activityData.find(elem => elem.date === date)
+    let todaysSteps = this.activityData.find(elem => elem.date === date);
 
     if(this.user.dailyStepGoal <= todaysSteps.numSteps){
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   returnAllDaysStepGoalExceeded(){
     this.sortActivityData();
       let daysMet = this.sortedActivityData.filter(daily => this.user.dailyStepGoal <= daily.numSteps);
       if(daysMet.length === 0){
-        return 'Goal not met'
+        return 'Goal not met';
       }
       return daysMet;
   }
@@ -175,9 +175,9 @@ class User {
   }
 
   returnStairsByDay(date){
-    let dailyStairs = this.activityData.find(elem => elem.date === date)
+    let dailyStairs = this.activityData.find(elem => elem.date === date);
     if(dailyStairs === undefined){
-      return 'No data'
+      return 'No data';
     }
     return dailyStairs.flightsOfStairs;
   }
@@ -191,13 +191,10 @@ class User {
 
     let index = this.sortedActivityData.findIndex((e) => e.date === date);
 
-    let output = this.sortedActivityData.slice(index, index + 7)
+    let output = this.sortedActivityData.slice(index, index + 7);
 
     return output;
   }
-
 }
-
-
 
 export default User;
