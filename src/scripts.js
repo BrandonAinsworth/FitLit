@@ -73,12 +73,12 @@ sleepHours.addEventListener('keydown', checkFieldsSleep);
 sleepQuality.addEventListener('keydown', checkFieldsSleep);
 sleepButton.addEventListener('click', saveNewSleep);
 
-// const getRandomID = () => {
-//   return Math.floor(Math.random() * 50);
-// }
-//
-// const id = getRandomID();
-const id = 2; //This should be Jarvis.
+const getRandomID = () => {
+  return Math.floor(Math.random() * 50);
+}
+
+const id = getRandomID();
+// const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -118,8 +118,8 @@ function updateSleep(data) {
   individual.getSleepData(sleepRepo);
   let latestWeekSleepData = individual.returnLatestWeekSleepData();
   let myDate = latestWeekSleepData[0].date;
-  dailyHoursSlept.innerText = `Daily Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
-  dailySleepQuality.innerText = `Daily Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
+  dailyHoursSlept.innerText = `Hours Slept for ${myDate}: ${individual.returnDailyHoursSlept(myDate)}`;
+  dailySleepQuality.innerText = `Sleep Quality for ${myDate}: ${individual.returnDailySleepQuality(myDate)}`;
   individual.returnWeeklySleepData(myDate).forEach(data => {
       weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
   });
@@ -135,10 +135,10 @@ function updateActivity(data) {
   let latestWeekActivityData = individual.sortActivityData();
   let myDate = latestWeekActivityData[0].date;
   let dailyStepCount = individual.returnStepsByDay(myDate);
-  totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
-  dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
-  dailyFlights.innerText = `Daily Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
-  dailyMiles.innerText = `Daily Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
+  totalDailySteps.innerText = `Step Count: ${dailyStepCount}`;
+  dailyMinutesActive.innerText = `Minutes Active: ${individual.returnMinutesActive(myDate)}`;
+  dailyFlights.innerText = `Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
+  dailyMiles.innerText = `Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
   stepsCompared.innerText = `Average Steps: ${activityRepo.averageAllUsersStepsByDate(myDate)}`;
   minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
   flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
@@ -161,9 +161,9 @@ function gatherWeeklyActivityData(date) {
 
 function getUserInfo(id) {
     var currentUser = userRepo.returnSpecificUser(id);
-    userFullName.innerText = `Name: ${currentUser[0].name}`;
-    userAddress.innerText = `Address: ${currentUser[0].address}`;
-    userEmail.innerText = `Email: ${currentUser[0].email}`;
+    // userFullName.innerText = `Name: ${currentUser[0].name}`;
+    // userAddress.innerText = `Address: ${currentUser[0].address}`;
+    // userEmail.innerText = `Email: ${currentUser[0].email}`;
     userStrideLength.innerText = `Stride Length: ${currentUser[0].strideLength}ft`;
     userStepGoal.innerText = `Your Step Goal: ${currentUser[0].dailyStepGoal}`;
     return currentUser;
@@ -284,10 +284,10 @@ function saveNewActivity(event) {
       let myDate = latestWeekActivityData[0].date;
       let dailyStepCount = individual.returnStepsByDay(myDate);
         // refresh data showing on page
-      totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
-      dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
-      dailyFlights.innerText = `Daily Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
-      dailyMiles.innerText = `Daily Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
+      totalDailySteps.innerText = `Step Count: ${dailyStepCount}`;
+      dailyMinutesActive.innerText = `Minutes Active: ${individual.returnMinutesActive(myDate)}`;
+      dailyFlights.innerText = `Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
+      dailyMiles.innerText = `Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
       stepsCompared.innerText = `Average Steps: ${activityRepo.averageAllUsersStepsByDate(myDate)}`;
       minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
       flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
