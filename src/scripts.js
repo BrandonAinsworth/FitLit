@@ -1,5 +1,5 @@
 import './css/styles.css';
-import { postNewHydration, postNewActivity, 
+import { postNewHydration, postNewActivity,
   postNewSleep, promise } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
@@ -131,9 +131,11 @@ function updateSleep(data) {
 function updateActivity(data) {
   activityData = data;
   activityRepo = new Activity(activityData);
+  console.log(activityRepo);
   individual.getActivityData(activityRepo);
   let latestWeekActivityData = individual.sortActivityData();
   let myDate = latestWeekActivityData[0].date;
+  console.log(myDate);
   let dailyStepCount = individual.returnStepsByDay(myDate);
   totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
   dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
@@ -234,9 +236,9 @@ function saveNewHydrationInfo(event) {
   //   console.log("Error: Date already exists");
   //   window.alert("Error: Date already exists");
   // } else {
-  
+
   // TO DO: parse hydrationOz to a number before submitting POST.
-  
+
   // // post information to local server.
   postNewHydration({userID: individual.user.id, date: newDate, numOunces: hydrationOz.value})
   .then(data => {
@@ -271,9 +273,11 @@ function saveNewActivity(event) {
   //   window.alert("Error: Date already exists");
   // } else {
 
-    // TO DO: parse activity values to be numbers instead of strings.
+    let flights = parseInt(activityFlights.value);
+    let minutes = parseInt(activityMinutes.value);
+    let steps = parseInt(activitySteps.value);
 
-    postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs:activityFlights.value, minutesActive: activityMinutes.value, numSteps: activitySteps.value})
+    postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs: flights, minutesActive: minutes, numSteps: steps})
     .then(data => {
       activityRepo.allUsersActivityData.unshift(data);
       individual.activityData.unshift(data);
@@ -297,7 +301,7 @@ function saveNewActivity(event) {
       activitySteps.value = ""
       activityDate.value = "";
       checkFieldsActivity();
-      
+
       // success message to user?
     })
   // }
@@ -337,7 +341,7 @@ function saveNewSleep(event) {
       latestWeekSleepData.forEach(data => {
         weeklySleepData.innerText +=  `Date ${data.date}: Hours Slept: ${data.hoursSlept} Sleep Quality: ${data.sleepQuality}\n`;
       })
-  
+
       allTimeAverageHoursSlept.innerText = `Average Hours Slept All Time: ${individual.averageHoursSleptAllTime()}`;
       console.log(individual.averageSleepQualityAllTime());
       allTimeAverageSleepQuality.innerText = `Average Sleep Quality All Time: ${individual.averageSleepQualityAllTime()}`;
@@ -347,7 +351,7 @@ function saveNewSleep(event) {
       sleepQuality.value = "";
       sleepDate.value = "";
       checkFieldsSleep();
-      
+
       // success message to user?
 
     })
