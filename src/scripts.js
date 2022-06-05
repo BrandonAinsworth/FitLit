@@ -1,5 +1,5 @@
 import './css/styles.css';
-import { postNewHydration, promise } from './apiCalls'
+import { postNewHydration, postNewActivity, promise } from './apiCalls'
 import UserRepository from './UserRepository';
 import User from './User';
 import Hydration from './Hydration';
@@ -33,7 +33,11 @@ var weeklyActivityData = document.querySelector(".weekly-user-activity");
 var hydrationDate = document.getElementById("hydration-date");
 var hydrationOz = document.getElementById("hydration-oz");
 var hydrationButton = document.getElementById("hydration-button");
-
+var activityDate = document.getElementById("activity-date");
+var activityFlights = document.getElementById("activity-flights");
+var activityMinutes = document.getElementById("activity-minutes");
+var activitySteps = document.getElementById("activity-steps");
+var activityButton = document.getElementById("activity-button");
 
 /*~~~~~~~~GLOBAL VARIABLES~~~~~~~*/
 var userRepo;
@@ -50,19 +54,20 @@ var activityRepo;
 
 /*~~~~~~~~EVENT LISTENERS~~~~~~~*/
 hydrationButton.addEventListener('click', saveNewHydrationInfo);
-hydrationDate.addEventListener('keyup', checkFields);
-hydrationOz.addEventListener('keydown', checkFields);
+hydrationDate.addEventListener('keydown', checkFieldsHydration);
+hydrationOz.addEventListener('keydown', checkFieldsHydration);
+activityDate.addEventListener('keydown', checkFieldsActivity);
+activityFlights.addEventListener('keydown', checkFieldsActivity);
+activityMinutes.addEventListener('keydown', checkFieldsActivity);
+activitySteps.addEventListener('keydown', checkFieldsActivity);
+activityButton.addEventListener("click", saveNewActivity);
 
-
-
-
-
-const getRandomID = () => {
-  return Math.floor(Math.random() * 50);
-}
-
-const id = getRandomID();
-// const id = 2; //This should be Jarvis.
+// const getRandomID = () => {
+//   return Math.floor(Math.random() * 50);
+// }
+//
+// const id = getRandomID();
+const id = 2; //This should be Jarvis.
 
 /*~~~~~~~~FUNCTIONS~~~~~~~*/
 function getData(){
@@ -171,7 +176,7 @@ function renderWeeklyWaterConsumption(weeklyConsumption) {
 }
 
 
-function checkFields() {
+function checkFieldsHydration() {
   // function to check when all required fields of form are filled in.
   // Then enable save button.
 
@@ -184,34 +189,77 @@ function checkFields() {
   }
 }
 
+function checkFieldsActivity() {
+  if (activityDate.value !== "" && activityFlights.value !== "" &&
+    activityMinutes.value !== "" && activitySteps.value !== "") {
+    activityButton.classList.remove('disable');
+    activityButton.disabled = false;
+  } else {
+    activityButton.classList.add('disable');
+    activityButton.disabled = true;
+  }
+}
+
 
 
 function saveNewHydrationInfo(event) {
   event.preventDefault();
 
   //check data & data validation.
-  
-
-  // look at date to ensure it doesn't already exist in the data.
   // confirm date is not a future date.
-  // 
   let newDate = hydrationDate.value.split('-');
   newDate = newDate.join('/');
 
-  // post information to local server.
+  // look at date to ensure it doesn't already exist in the data.
+  // if (individual.hydrationData.includes(newDate)) {
+  //   console.log("Error: Date already exists");
+  //   window.alert("Error: Date already exists");
+  // } else {
+  // // post information to local server.
   postNewHydration({userID: individual.user.id, date: newDate, numOunces: hydrationOz.value})
   .then(data => {
-    
+
     individual.hydrationData.unshift(data);
+    // refresh data showing on page
     weeklyConsumption = individual.returnWeeklyOuncesConsumed();
     dailyConsumption = individual.returnDailyOuncesConsumed(weeklyConsumption[0].date);
     renderWeeklyWaterConsumption(weeklyConsumption);
-    totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;  
-    // message to user?
-  })
-  // refresh data showing on page
-
+    totalDailyOunces.innerText = `${dailyConsumption} oz. consumed today!`;
+    // success message to user?
+    })
+  // }
 }
 
+function saveNewActivity(event) {
+  event.preventDefault();
 
-/*~~~~~~~~CONTINUE HERE LOOK AT THIS~~~~~~~*/
+  let newDate = activityDate.value.split('-');
+  newDate = newDate.join('/');
+
+
+  // look at date to ensure it doesn't already exist in the data.
+  // ?? if (individual.activityData.includes(newDate)) {
+  //   console.log("Error: Date already exists");
+  //   window.alert("Error: Date already exists");
+  // } else {
+    postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs:activityFlights.value, minutesActive: activityMinutes.value, numSteps: activitySteps.value})
+    .then(data => {
+      activityRepo.allUsersActivityData.unshift(data);
+      console.log(activityRepo);
+      individual.activityData.unshift(data);
+      let latestWeekActivityData = individual.sortActivityData();
+      let myDate = latestWeekActivityData[0].date;
+      let dailyStepCount = individual.returnStepsByDay(myDate);
+        // refresh data showing on page
+      totalDailySteps.innerText = `Daily Step Count: ${dailyStepCount}`;
+      dailyMinutesActive.innerText = `Daily Minutes Active: ${individual.returnMinutesActive(myDate)}`;
+      dailyFlights.innerText = `Daily Flights Climbed: ${individual.returnStairsByDay(myDate)}`;
+      dailyMiles.innerText = `Daily Miles Walked: ${individual.returnUserMilesWalked(myDate)}`;
+      stepsCompared.innerText = `Average Steps: ${activityRepo.averageAllUsersStepsByDate(myDate)}`;
+      minutesCompared.innerText = `Average Minutes: ${activityRepo.averageAllUsersMinutesByDate(myDate)}`;
+      flightsCompared.innerText = `Average Flights: ${activityRepo.averageAllUsersStairsByDate(myDate)}`;
+      weeklyActivityData.innerText = `Weekly Activity \n ${gatherWeeklyActivityData(myDate)}`;
+      // success message to user?
+    })
+  // }
+}
