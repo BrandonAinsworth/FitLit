@@ -55,16 +55,16 @@ var activityRepo;
 
 /*~~~~~~~~EVENT LISTENERS~~~~~~~*/
 hydrationButton.addEventListener('click', saveNewHydrationInfo);
-hydrationDate.addEventListener('keydown', checkFieldsHydration);
-hydrationOz.addEventListener('keydown', checkFieldsHydration);
-activityDate.addEventListener('keydown', checkFieldsActivity);
-activityFlights.addEventListener('keydown', checkFieldsActivity);
-activityMinutes.addEventListener('keydown', checkFieldsActivity);
-activitySteps.addEventListener('keydown', checkFieldsActivity);
+hydrationDate.addEventListener('keyup', checkFieldsHydration);
+hydrationOz.addEventListener('keyup', checkFieldsHydration);
+activityDate.addEventListener('keyup', checkFieldsActivity);
+activityFlights.addEventListener('keyup', checkFieldsActivity);
+activityMinutes.addEventListener('keyup', checkFieldsActivity);
+activitySteps.addEventListener('keyup', checkFieldsActivity);
 activityButton.addEventListener("click", saveNewActivity);
-sleepDate.addEventListener('keydown', checkFieldsSleep);
-sleepHours.addEventListener('keydown', checkFieldsSleep);
-sleepQuality.addEventListener('keydown', checkFieldsSleep);
+sleepDate.addEventListener('keyup', checkFieldsSleep);
+sleepHours.addEventListener('keyup', checkFieldsSleep);
+sleepQuality.addEventListener('keyup', checkFieldsSleep);
 sleepButton.addEventListener('click', saveNewSleep);
 
 const getRandomID = () => {
@@ -210,15 +210,10 @@ function checkFieldsSleep() {
 
 function saveNewHydrationInfo(event) {
   event.preventDefault();
-  //check data & data validation.
-  // confirm date is not a future date.
+
   let newDate = hydrationDate.value.split('-');
   newDate = newDate.join('/');
-  // look at date to ensure it doesn't already exist in the data.
-  // if (individual.hydrationData.includes(newDate)) {
-  //   console.log("Error: Date already exists");
-  //   window.alert("Error: Date already exists");
-  // } else {
+
   let ounces = parseInt(hydrationOz.value);
   postNewHydration({userID: individual.user.id, date: newDate, numOunces: ounces})
   .then(data => {
@@ -232,8 +227,7 @@ function saveNewHydrationInfo(event) {
     hydrationOz.value = "";
     hydrationDate.value = "";
     checkFieldsHydration();
-    })
-  // }
+  });
 }
 
 function saveNewActivity(event) {
@@ -241,16 +235,12 @@ function saveNewActivity(event) {
 
   let newDate = activityDate.value.split('-');
   newDate = newDate.join('/');
-  // look at date to ensure it doesn't already exist in the data.
-  // ?? if (individual.activityData.includes(newDate)) {
-  //   console.log("Error: Date already exists");
-  //   window.alert("Error: Date already exists");
-  // } else {
-    let flights = parseInt(activityFlights.value);
-    let minutes = parseInt(activityMinutes.value);
-    let steps = parseInt(activitySteps.value);
 
-    postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs: flights, minutesActive: minutes, numSteps: steps})
+  let flights = parseInt(activityFlights.value);
+  let minutes = parseInt(activityMinutes.value);
+  let steps = parseInt(activitySteps.value);
+
+  postNewActivity({userID: individual.user.id, date: newDate, flightsOfStairs: flights, minutesActive: minutes, numSteps: steps})
     .then(data => {
       activityRepo.allUsersActivityData.unshift(data);
       individual.activityData.unshift(data);
@@ -272,8 +262,7 @@ function saveNewActivity(event) {
       activitySteps.value = ""
       activityDate.value = "";
       checkFieldsActivity();
-    })
-  // }
+  });
 }
 
 function saveNewSleep(event) {
@@ -281,15 +270,11 @@ function saveNewSleep(event) {
 
   let newDate = sleepDate.value.split('-');
   newDate = newDate.join('/');
-  // look at date to ensure it doesn't already exist in the data.
-  // ?? if (individual.activityData.includes(newDate)) {
-  //   console.log("Error: Date already exists");
-  //   window.alert("Error: Date already exists");
-  // } else {
-    let hours = parseFloat(sleepHours.value);
-    let qual = parseFloat(sleepQuality.value);
+ 
+  let hours = parseFloat(sleepHours.value);
+  let qual = parseFloat(sleepQuality.value);
 
-    postNewSleep({userID: individual.user.id, date: newDate, hoursSlept: hours, quality: qual})
+  postNewSleep({userID: individual.user.id, date: newDate, hoursSlept: hours, quality: qual})
     .then(data => {
       individual.sortedSleepData.unshift(data);
 
@@ -308,6 +293,5 @@ function saveNewSleep(event) {
       sleepQuality.value = "";
       sleepDate.value = "";
       checkFieldsSleep();
-    })
-  // }
+  });
 }
