@@ -21,8 +21,7 @@ export function postNewHydration(userDetails){
       date: userDetails.date , numOunces: userDetails.numOunces}),
     headers: {'Content-Type': 'application/json'}
   })
-    .then(response => response.json())
-
+    .then(response => checkForErrors(response))
     .catch(error => console.log('Error'))
 }
 
@@ -38,8 +37,7 @@ export function postNewActivity(userDetails){
     }),
     headers: {'Content-Type': 'application/json'}
   })
-    .then(response => response.json())
-
+    .then(response => checkForErrors(response))
     .catch(error => console.log('Error'))
 }
 
@@ -54,8 +52,7 @@ export function postNewSleep(userDetails){
     }),
     headers: {'Content-Type': 'application/json'}
   })
-    .then(response => response.json())
-
+    .then(response => checkForErrors(response))
     .catch(error => console.log('Error'))
 }
 
